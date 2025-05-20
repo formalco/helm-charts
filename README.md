@@ -27,7 +27,7 @@ Next, retrieve the default values and save them to a local file for
 customization:
 
 ```
-$ helm show values formal/connector > values.yml
+$ helm show values formal/connector > values.yaml
 ```
 
 You can then edit `values.yaml` to fit your deployment needs. For the
