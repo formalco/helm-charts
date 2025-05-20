@@ -2,6 +2,16 @@ apiVersion: v1
 entries:
   connector:
   - apiVersion: v2
+    created: "2025-05-20T23:40:39.500802858Z"
+    description: The Formal Connector is a protocol-aware proxy that provides visibility
+      and control over the flow of data between your resources and users.
+    digest: 96f81d2fb66d35fcbc99379c911bb0956f321999c7a30e833d149f49af9c3c37
+    name: connector
+    type: application
+    urls:
+    - https://github.com/formalco/helm-charts/releases/download/connector-0.2.1/connector-0.2.1.tgz
+    version: 0.2.1
+  - apiVersion: v2
     appVersion: 1.0.0
     created: "2025-05-20T22:13:42.672921992Z"
     description: The Formal Connector is a protocol-aware proxy that provides visibility
@@ -12,6 +22,17 @@ entries:
     urls:
     - https://github.com/formalco/helm-charts/releases/download/connector-0.1.0/connector-0.1.0.tgz
     version: 0.1.0
+  ecr-cred:
+  - apiVersion: v2
+    created: "2025-05-20T23:40:39.618558127Z"
+    description: ECR credentials job. Required for non-AWS environments. Requires
+      `image.pullWithCredentials=true` in the Connector Helm chart values.
+    digest: 901ae978559b70ad61be7bd4153a56f1aa4f3ecc6ecefee9e1067b70ae6ae479
+    name: ecr-cred
+    type: application
+    urls:
+    - https://github.com/formalco/helm-charts/releases/download/ecr-cred-0.1.1/ecr-cred-0.1.1.tgz
+    version: 0.1.1
   formal-connector:
   - apiVersion: v2
     appVersion: 1.0.0
@@ -24,4 +45,4 @@ entries:
     urls:
     - https://github.com/formalco/helm-charts/releases/download/formal-connector-0.1.0/formal-connector-0.1.0.tgz
     version: 0.1.0
-generated: "2025-05-20T22:13:42.672927011Z"
+generated: "2025-05-20T23:40:39.618568967Z"
