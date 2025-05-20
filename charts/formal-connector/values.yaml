@@ -6,8 +6,11 @@ image:
   pullPolicy: Always
   tag: "latest"
 
+# API key for the Connector configured in Formal Control Plane
 formalAPIKey: ""
 
+# Define the ports of the connector depending on the listeners you've
+# configured in Formal Control Plane
 ports:
   postgres: null
   kubernetes: null
