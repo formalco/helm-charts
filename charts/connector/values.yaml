@@ -1,13 +1,17 @@
 nameOverride: ""
 fullnameOverride: ""
 
+# API key for the Connector configured in Formal Control Plane
+formalAPIKey: ""
+
+# Set to true if you're deploying outside AWS and use the ECR
+# credentials job (ecr-cred Helm chart) to fetch ECR credentials
+pullWithCredentials: false
+
 image:
   repository: 654654333078.dkr.ecr.eu-west-1.amazonaws.com/formalco-prod-connector
   pullPolicy: Always
   tag: "latest"
-
-# API key for the Connector configured in Formal Control Plane
-formalAPIKey: ""
 
 # Define the ports of the connector depending on the listeners you've
 # configured in Formal Control Plane

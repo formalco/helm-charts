@@ -1,0 +1,12 @@
+nameOverride: ""
+fullnameOverride: ""
+
+# These credentials are provided by the Formal team
+ecrAccessKeyId: ""
+ecrSecretAccessKey: ""
+
+region: eu-west-1
+schedule: "0 */6 * * *"
+registryUrl: 654654333078.dkr.ecr.eu-west-1.amazonaws.com
+successfulJobsHistoryLimit: 3
+failedJobsHistoryLimit: 1

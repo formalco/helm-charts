@@ -10,9 +10,10 @@ This repository contains Helm Charts to deploy Formal on your Kubernetes cluster
 
 ## Available Charts
 
-| Charts                                            | Description                                                               |
-| ------------------------------------------------- | ------------------------------------------------------------------------- |
-| [connector](charts/connector)                     | Formal Connector Helm Chart.                                              |
+| Charts                        | Description                                                                                                                           |
+|-------------------------------|---------------------------------------------------------------------------------------------------------------------------------------|
+| [connector](charts/connector) | Formal Connector base Helm chart.                                                                                                     |
+| [ecr-cred](charts/ecr-cred)   | ECR credentials job. Required for non-AWS environments. Requires `image.pullWithCredentials=true` in the Connector Helm chart values. |
 
 ## Using the Helm Repository
 

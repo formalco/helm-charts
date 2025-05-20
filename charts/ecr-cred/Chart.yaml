@@ -1,0 +1,5 @@
+apiVersion: v2
+name: connector
+description: ECR credentials job. Required for non-AWS environments. Requires `image.pullWithCredentials=true` in the Connector Helm chart values.
+type: application
+version: 0.1.0

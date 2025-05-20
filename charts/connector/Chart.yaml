@@ -2,5 +2,4 @@ apiVersion: v2
 name: connector
 description: The Formal Connector is a protocol-aware proxy that provides visibility and control over the flow of data between your resources and users. 
 type: application
-version: 0.1.0
-appVersion: "1.0.0"
+version: 0.2.0
