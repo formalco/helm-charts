@@ -12,22 +12,32 @@ This repository contains Helm Charts to deploy Formal on your Kubernetes cluster
 
 | Charts                                            | Description                                                               |
 | ------------------------------------------------- | ------------------------------------------------------------------------- |
-| [connector](charts/formal-connector)       | Formal Connector Helm Chart.                                              |
+| [connector](charts/connector)                     | Formal Connector Helm Chart.                                              |
 
-## Adding the Helm Repository
+## Using the Helm Repository
 
-The Formal Helm repository can be added using the `helm repo add`
-command, like in the following example:
+To get started with the Formal Helm charts, first add the Formal Helm repository:
 
 ```
 $ helm repo add formal https://formalco.github.io/helm-charts
 "formal" has been added to your repositories
 ```
 
-You can then install the charts using the `helm install` command:
+Next, retrieve the default values and save them to a local file for
+customization:
 
 ```
-$ helm install formal-connector formal/connector
+$ helm show values formal/connector > values.yml
+```
+
+You can then edit `values.yaml` to fit your deployment needs. For the
+Connector, you will need to update the API key and set at least one
+port.
+
+Finally, install the Connector chart using:
+
+```
+$ helm install formal-connector formal/connector -f values.yaml
 ```
 
 ## Questions
