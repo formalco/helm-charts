@@ -1,0 +1,43 @@
+nameOverride: ""
+fullnameOverride: ""
+
+image:
+  repository: 654654333078.dkr.ecr.eu-west-1.amazonaws.com/formalco-prod-connector
+  pullPolicy: Always
+  tag: "latest"
+
+formalAPIKey: ""
+
+ports:
+  postgres: null
+  kubernetes: null
+  ssh: null
+  bigquery: null
+  healthCheck: 8080
+
+replicaCount: 2
+resources:
+  requests:
+    cpu: 4
+    memory: 8Gi
+  limits:
+    cpu: 8
+    memory: 16Gi
+
+service:
+  type: LoadBalancer
+
+  # Set the service annotations according to your Kubernetes provider
+  # and network topoligy
+  annotations: {}
+  
+  # Optional: restrict source IPs that can access the service
+  loadBalancerSourceRanges: []
+    # - 10.0.0.0/8
+    # - 172.16.0.0/12
+    # - 192.168.0.0/16
+
+securityContext: {}
+podSecurityContext: {}
+podAnnotations:
+  cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
