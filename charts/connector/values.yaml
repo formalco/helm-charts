@@ -48,3 +48,6 @@ securityContext: {}
 podSecurityContext: {}
 podAnnotations:
   cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+
+serviceAccount:
+  name: ""
