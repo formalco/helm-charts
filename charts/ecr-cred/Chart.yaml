@@ -2,4 +2,4 @@ apiVersion: v2
 name: ecr-cred
 description: ECR credentials job. Required for non-AWS environments. Requires `image.pullWithCredentials=true` in the Connector Helm chart values.
 type: application
-version: 0.1.1
+version: 0.2.0
