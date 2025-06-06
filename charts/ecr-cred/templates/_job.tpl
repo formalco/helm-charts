@@ -1,10 +1,19 @@
 {{- define "connector.ecrJob" }}
 template:
+  metadata:
+    labels:
+      {{- with .Values.podLabels }}
+      {{- toYaml . | nindent 6 }}
+      {{- end }}
   spec:
     serviceAccountName: formal-ecr-secret-manager
     containers:
       - name: ecr-cred-helper
-        image: amazon/aws-cli:latest
+        {{- if .Values.image.digest }}
+        image: "{{ .Values.image.repository }}@{{ .Values.image.digest }}"
+        {{- else }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        {{- end }}
         resources:
           requests:
             cpu: 100m

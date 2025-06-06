@@ -1,6 +1,10 @@
 nameOverride: ""
 fullnameOverride: ""
 
+image:
+  repository: amazon/aws-cli
+  tag: latest
+
 # These credentials are provided by the Formal team
 ecrAccessKeyId: ""
 ecrSecretAccessKey: ""
