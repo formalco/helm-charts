@@ -17,6 +17,7 @@ image:
 # configured in Formal Control Plane
 ports:
   postgres: null
+  mongodb: null
   kubernetes: null
   ssh: null
   bigquery: null

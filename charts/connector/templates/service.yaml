@@ -21,6 +21,12 @@ spec:
       protocol: TCP
       name: postgres
     {{- end }}
+    {{- if .Values.ports.mongodb }}
+    - port: {{ .Values.ports.mongodb }}
+      targetPort: mongodb
+      protocol: TCP
+      name: mongodb
+    {{- end }}
     {{- if .Values.ports.kubernetes }}
     - port: {{ .Values.ports.kubernetes }}
       targetPort: kubernetes

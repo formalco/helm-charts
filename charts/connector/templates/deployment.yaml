@@ -41,6 +41,10 @@ spec:
             - name: postgres
               containerPort: {{ .Values.ports.postgres }}
             {{- end }}
+            {{- if .Values.ports.mongodb }}
+            - name: mongodb
+              containerPort: {{ .Values.ports.mongodb }}
+            {{- end }}
             {{- if .Values.ports.kubernetes }}
             - name: kubernetes
               containerPort: {{ .Values.ports.kubernetes }}
