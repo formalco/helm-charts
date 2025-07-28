@@ -15,35 +15,11 @@ spec:
     {{- toYaml . | nindent 4 }}
   {{- end }}
   ports:
-    {{- if .Values.ports.postgres }}
-    - port: {{ .Values.ports.postgres }}
-      targetPort: postgres
+    {{- range .Values.ports }}
+    - port: {{ .port }}
+      targetPort: {{ .name }}
       protocol: TCP
-      name: postgres
-    {{- end }}
-    {{- if .Values.ports.mongodb }}
-    - port: {{ .Values.ports.mongodb }}
-      targetPort: mongodb
-      protocol: TCP
-      name: mongodb
-    {{- end }}
-    {{- if .Values.ports.kubernetes }}
-    - port: {{ .Values.ports.kubernetes }}
-      targetPort: kubernetes
-      protocol: TCP
-      name: kubernetes
-    {{- end }}
-    {{- if .Values.ports.ssh }}
-    - port: {{ .Values.ports.ssh }}
-      targetPort: ssh
-      protocol: TCP
-      name: ssh
-    {{- end }}
-    {{- if .Values.ports.bigquery }}
-    - port: {{ .Values.ports.bigquery }}
-      targetPort: bigquery
-      protocol: TCP
-      name: bigquery
+      name: {{ .name }}
     {{- end }}
   selector:
     {{- include "connector.selectorLabels" . | nindent 4 }}

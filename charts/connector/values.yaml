@@ -16,11 +16,14 @@ image:
 # Define the ports of the connector depending on the listeners you've
 # configured in Formal Control Plane
 ports:
-  postgres: null
-  mongodb: null
-  kubernetes: null
-  ssh: null
-  bigquery: null
+  # - name: postgres-listener
+  #   port: 5432
+  # - name: mongodb-listener
+  #   port: 27017
+  # - name: kubernetes-listener
+  #   port: 443
+  # - name: ssh-listener
+  #   port: 22
 
 # Update your Connector environment variables, if needed (optional)
 # https://docs.joinformal.com/advanced-connector-settings/environment-variables

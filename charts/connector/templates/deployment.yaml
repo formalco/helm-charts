@@ -37,25 +37,9 @@ spec:
           {{- end }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            {{- if .Values.ports.postgres }}
-            - name: postgres
-              containerPort: {{ .Values.ports.postgres }}
-            {{- end }}
-            {{- if .Values.ports.mongodb }}
-            - name: mongodb
-              containerPort: {{ .Values.ports.mongodb }}
-            {{- end }}
-            {{- if .Values.ports.kubernetes }}
-            - name: kubernetes
-              containerPort: {{ .Values.ports.kubernetes }}
-            {{- end }}
-            {{- if .Values.ports.ssh }}
-            - name: ssh
-              containerPort: {{ .Values.ports.ssh }}
-            {{- end }}
-            {{- if .Values.ports.bigquery }}
-            - name: bigquery
-              containerPort: {{ .Values.ports.bigquery }}
+            {{- range .Values.ports }}
+            - name: {{ .name }}
+              containerPort: {{ .port }}
             {{- end }}
             - name: health
               containerPort: 8080
