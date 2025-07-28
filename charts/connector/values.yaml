@@ -21,7 +21,6 @@ ports:
   kubernetes: null
   ssh: null
   bigquery: null
-  healthCheck: 8080
 
 # Update your Connector environment variables, if needed (optional)
 # https://docs.joinformal.com/advanced-connector-settings/environment-variables

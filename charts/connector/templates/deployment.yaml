@@ -58,7 +58,7 @@ spec:
               containerPort: {{ .Values.ports.bigquery }}
             {{- end }}
             - name: health
-              containerPort: {{ .Values.ports.healthCheck }}
+              containerPort: 8080
           env:
             - name: FORMAL_CONTROL_PLANE_API_KEY
               valueFrom:
