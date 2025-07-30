@@ -58,6 +58,7 @@ securityContext: {}
 podSecurityContext: {}
 podAnnotations:
   cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
-
+volumes: []
+volumeMounts: []
 serviceAccount:
   name: ""
