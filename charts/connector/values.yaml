@@ -62,3 +62,12 @@ volumes: []
 volumeMounts: []
 serviceAccount:
   name: ""
+
+# Extra manifests to deploy as an array of objects
+extraManifests: []
+  # - apiVersion: v1
+  #   kind: ConfigMap
+  #   metadata:
+  #     name: example-configmap
+  #   data:
+  #     key: value
