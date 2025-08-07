@@ -47,7 +47,7 @@ service:
   # Set the service annotations according to your Kubernetes provider
   # and network topoligy
   annotations: {}
-  
+
   # Optional: restrict source IPs that can access the service
   loadBalancerSourceRanges: []
     # - 10.0.0.0/8
@@ -71,3 +71,6 @@ extraManifests: []
   #     name: example-configmap
   #   data:
   #     key: value
+
+# Additional containers to run in the same pod as the main connector container
+sidecars: []
