@@ -21,5 +21,9 @@ spec:
       protocol: TCP
       name: {{ .name }}
     {{- end }}
+    - port: 8080
+      targetPort: health
+      protocol: TCP
+      name: health
   selector:
     {{- include "connector.selectorLabels" . | nindent 4 }}
