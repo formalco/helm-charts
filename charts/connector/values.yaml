@@ -25,13 +25,6 @@ ports:
   # - name: ssh-listener
   #   port: 22
 
-# Update your Connector environment variables, if needed (optional)
-# https://docs.joinformal.com/advanced-connector-settings/environment-variables
-env:
-  SERVER_CONNECT_TLS: "true"
-  CLIENT_LISTEN_TLS: "true"
-  LOG_LEVEL: "info"
-
 replicaCount: 2
 resources:
   requests:
