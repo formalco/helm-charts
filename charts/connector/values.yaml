@@ -47,6 +47,12 @@ service:
   # Set the service annotations according to your Kubernetes provider
   # and network topoligy
   annotations: {}
+    # # Example annotations for AWS NLB
+    # service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: instance
+    # service.beta.kubernetes.io/aws-load-balancer-type: nlb-ip
+    # service.beta.kubernetes.io/aws-load-balancer-healthcheck-protocol: HTTP
+    # service.beta.kubernetes.io/aws-load-balancer-healthcheck-path: "/health"
+    # service.beta.kubernetes.io/aws-load-balancer-healthcheck-port: "8080"
 
   # Optional: restrict source IPs that can access the service
   loadBalancerSourceRanges: []
