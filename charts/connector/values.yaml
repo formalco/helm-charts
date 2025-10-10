@@ -59,7 +59,16 @@ podAnnotations:
   cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
 volumes: []
 volumeMounts: []
+
+# RBAC resources give pod and lease permissions to the service account for
+# cluster formation (pod discovery + lease-based bootstrap coordination)
+rbac:
+  create: true
+
+# Set to `create` to false and provide your own service account name if you
+# don't want this chart to create one
 serviceAccount:
+  create: true
   name: ""
 
 # Extra manifests to deploy as an array of objects
