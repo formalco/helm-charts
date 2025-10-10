@@ -44,3 +44,16 @@ Selector labels
 app.kubernetes.io/name: {{ include "connector.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
+
+{{/*
+Create the name of the service account to use
+*/}}
+{{- define "connector.serviceAccountName" -}}
+{{- if .Values.serviceAccount.name }}
+{{- .Values.serviceAccount.name }}
+{{- else if .Values.serviceAccount.create }}
+{{- include "connector.fullname" . }}
+{{- else }}
+{{- fail "Cannot determine service account name. Either set serviceAccount.create=true or provide serviceAccount.name" }}
+{{- end }}
+{{- end }}
