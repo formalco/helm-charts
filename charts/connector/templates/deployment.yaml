@@ -23,9 +23,7 @@ spec:
     spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
-      {{- if .Values.serviceAccount.name }}
-      serviceAccountName: {{ .Values.serviceAccount.name }}
-      {{- end }}
+      serviceAccountName: {{ include "connector.serviceAccountName" . }}
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
