@@ -46,4 +46,8 @@ template:
                 name: {{ include "connector.fullname" . }}-ecr
                 key: ecr-secret-access-key
     restartPolicy: OnFailure
+    {{- with .Values.tolerations }}
+    tolerations:
+      {{- toYaml . | nindent 6 }}
+    {{- end }}
 {{- end }}

@@ -68,3 +68,7 @@ spec:
       imagePullSecrets:
         - name: formal-ecr-secret
       {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
