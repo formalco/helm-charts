@@ -124,6 +124,16 @@ entries:
     version: 0.1.0
   ecr-cred:
   - apiVersion: v2
+    created: "2025-10-31T16:35:49.976321578Z"
+    description: ECR credentials job. Required for non-AWS environments. Requires
+      `image.pullWithCredentials=true` in the Connector Helm chart values.
+    digest: d8e3b594837f291a60b2e963026e342f15fcfc911b2f1c5c0a14426d8b752b9f
+    name: ecr-cred
+    type: application
+    urls:
+    - https://github.com/formalco/helm-charts/releases/download/ecr-cred-0.3.0/ecr-cred-0.3.0.tgz
+    version: 0.3.0
+  - apiVersion: v2
     created: "2025-06-06T16:30:29.569037101Z"
     description: ECR credentials job. Required for non-AWS environments. Requires
       `image.pullWithCredentials=true` in the Connector Helm chart values.
@@ -155,4 +165,4 @@ entries:
     urls:
     - https://github.com/formalco/helm-charts/releases/download/formal-connector-0.1.0/formal-connector-0.1.0.tgz
     version: 0.1.0
-generated: "2025-10-31T16:34:42.252627934Z"
+generated: "2025-10-31T16:35:49.97634065Z"
