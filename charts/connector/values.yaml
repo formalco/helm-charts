@@ -59,6 +59,7 @@ podAnnotations:
   cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
 volumes: []
 volumeMounts: []
+tolerations: []
 
 # RBAC resources give pod and lease permissions to the service account for
 # cluster formation (pod discovery + lease-based bootstrap coordination)
