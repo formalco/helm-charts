@@ -15,14 +15,15 @@ image:
 
 # Define the ports of the connector depending on the listeners you've
 # configured in Formal Control Plane
+# NOTE: Port names are limited to 15 characters by Kubernetes (DNS_LABEL spec)
 ports:
-  # - name: postgres-listener
+  # - name: postgres
   #   port: 5432
-  # - name: mongodb-listener
+  # - name: mongodb
   #   port: 27017
-  # - name: kubernetes-listener
+  # - name: kubernetes
   #   port: 443
-  # - name: ssh-listener
+  # - name: ssh
   #   port: 22
 
 replicaCount: 2
