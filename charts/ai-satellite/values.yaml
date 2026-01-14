@@ -13,13 +13,7 @@ image:
   pullPolicy: Always
   tag: "latest"
 
-# gRPC listener for the AI satellite
-# NOTE: Port names are limited to 15 characters by Kubernetes (DNS_LABEL spec)
-ports:
-  - name: grpc
-    port: 50055
-
-replicaCount: 2
+replicaCount: 1
 resources:
   requests:
     cpu: 4
@@ -27,28 +21,13 @@ resources:
   limits:
     cpu: 8
     memory: 16Gi
-    # Requires a NVIDIA GPU with at least 48GB VRAM.
-    nvidia.com/gpu: 1
 
 securityContext: {}
 podSecurityContext: {}
 env: {}
 podAnnotations:
   cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
-volumes: []
-volumeMounts: []
 tolerations: []
-
-# RBAC resources give pod and lease permissions to the service account for
-# cluster formation (pod discovery + lease-based bootstrap coordination)
-rbac:
-  create: true
-
-# Set to `create` to false and provide your own service account name if you
-# don't want this chart to create one
-serviceAccount:
-  create: true
-  name: ""
 
 # Extra manifests to deploy as an array of objects
 extraManifests: []

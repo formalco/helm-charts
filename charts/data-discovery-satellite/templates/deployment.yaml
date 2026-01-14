@@ -35,10 +35,6 @@ spec:
           {{- end }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            {{- range .Values.ports }}
-            - name: {{ .name }}
-              containerPort: {{ .port }}
-            {{- end }}
             - name: health
               containerPort: 8080
           env:
@@ -53,17 +49,9 @@ spec:
             {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-          {{- with .Values.volumeMounts }}
-          volumeMounts:
-            {{- toYaml . | nindent 12 }}
-          {{- end }}
         {{- with .Values.sidecars }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
-      {{- with .Values.volumes }}
-      volumes:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
       {{- if .Values.pullWithCredentials }}
       imagePullSecrets:
         - name: formal-ecr-secret

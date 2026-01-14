@@ -13,9 +13,6 @@ image:
   pullPolicy: Always
   tag: "latest"
 
-# Data discovery does not expose any container ports besides health.
-ports: []
-
 replicaCount: 2
 resources:
   requests:
@@ -30,14 +27,7 @@ podSecurityContext: {}
 env: {}
 podAnnotations:
   cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
-volumes: []
-volumeMounts: []
 tolerations: []
-
-# RBAC resources give pod and lease permissions to the service account for
-# cluster formation (pod discovery + lease-based bootstrap coordination)
-rbac:
-  create: true
 
 # Set to `create` to false and provide your own service account name if you
 # don't want this chart to create one

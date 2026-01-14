@@ -13,6 +13,8 @@ This repository contains Helm Charts to deploy Formal on your Kubernetes cluster
 | Charts                        | Description                                                                                                                     |
 |-------------------------------|---------------------------------------------------------------------------------------------------------------------------------|
 | [connector](charts/connector) | Formal Connector base Helm chart.                                                                                               |
+| [data-discovery-satellite](charts/data-discovery-satellite) | Data Discovery Satellite Helm chart.                                                     |
+| [ai-satellite](charts/ai-satellite) | AI Satellite Helm chart (requires NVIDIA GPU). |
 | [ecr-cred](charts/ecr-cred)   | ECR credentials job. Required for non-AWS environments. Requires `pullWithCredentials=true` in the Connector Helm chart values. |
 
 ## Using the Helm Repository
@@ -39,6 +41,13 @@ Finally, install the Connector chart using:
 
 ```
 $ helm install formal-connector formal/connector -f values.yaml
+```
+
+The satellites can be installed similarly:
+
+```
+$ helm install formal-data-discovery-satellite formal/data-discovery-satellite -f values.yaml
+$ helm install formal-ai-satellite formal/ai-satellite -f values.yaml
 ```
 
 ## Questions
