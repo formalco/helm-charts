@@ -18,9 +18,12 @@ resources:
   requests:
     cpu: 4
     memory: 8Gi
+    nvidia.com/gpu: 1
   limits:
     cpu: 8
     memory: 16Gi
+    # Requires a NVIDIA GPU with at least 48GB VRAM.
+    nvidia.com/gpu: 1
 
 securityContext: {}
 podSecurityContext: {}

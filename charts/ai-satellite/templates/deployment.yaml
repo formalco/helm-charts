@@ -49,14 +49,7 @@ spec:
               value: {{ $value | quote }}
             {{- end }}
           resources:
-            limits:
-              cpu: {{ .Values.resources.limits.cpu }}
-              memory: {{ .Values.resources.limits.memory }}
-              nvidia.com/gpu: 1
-            requests:
-              cpu: {{ .Values.resources.requests.cpu }}
-              memory: {{ .Values.resources.requests.memory }}
-              nvidia.com/gpu: 1
+            {{- toYaml .Values.resources | nindent 12 }}
         {{- with .Values.sidecars }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
