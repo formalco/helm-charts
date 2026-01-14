@@ -29,11 +29,22 @@ ports:
 replicaCount: 2
 resources:
   requests:
-    cpu: 4
-    memory: 8Gi
+    cpu: 1
+    memory: 2Gi
   limits:
-    cpu: 8
-    memory: 16Gi
+    cpu: 2
+    memory: 4Gi
+
+# Log spool volume for buffering logs on disk during disruptions
+# Uses an emptyDir (ephemeral, lost on pod restart)
+# For persistence across restarts, replace with a PVC
+volumes:
+  - name: log-spool
+    emptyDir:
+      sizeLimit: 10Gi
+volumeMounts:
+  - name: log-spool
+    mountPath: /formal/logs
 
 service:
   type: LoadBalancer
@@ -58,8 +69,6 @@ securityContext: {}
 podSecurityContext: {}
 podAnnotations:
   cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
-volumes: []
-volumeMounts: []
 tolerations: []
 
 # RBAC resources give pod and lease permissions to the service account for
