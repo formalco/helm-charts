@@ -1,0 +1,5 @@
+apiVersion: v2
+name: ai-satellite
+description: The Formal AI Satellite serves AI features and inference inside your environment.
+type: application
+version: 0.10.0

@@ -1,0 +1,58 @@
+nameOverride: ""
+fullnameOverride: ""
+
+# API key for the Data Discovery Satellite configured in Formal Control Plane
+formalAPIKey: ""
+
+# Set to true if you're deploying outside AWS and use the ECR
+# credentials job (ecr-cred Helm chart) to fetch ECR credentials
+pullWithCredentials: false
+
+image:
+  repository: 654654333078.dkr.ecr.us-east-1.amazonaws.com/formalco-prod-data-discovery-satellite
+  pullPolicy: Always
+  tag: "latest"
+
+# Data discovery does not expose any container ports besides health.
+ports: []
+
+replicaCount: 2
+resources:
+  requests:
+    cpu: 4
+    memory: 8Gi
+  limits:
+    cpu: 8
+    memory: 16Gi
+
+securityContext: {}
+podSecurityContext: {}
+env: {}
+podAnnotations:
+  cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+volumes: []
+volumeMounts: []
+tolerations: []
+
+# RBAC resources give pod and lease permissions to the service account for
+# cluster formation (pod discovery + lease-based bootstrap coordination)
+rbac:
+  create: true
+
+# Set to `create` to false and provide your own service account name if you
+# don't want this chart to create one
+serviceAccount:
+  create: true
+  name: ""
+
+# Extra manifests to deploy as an array of objects
+extraManifests: []
+  # - apiVersion: v1
+  #   kind: ConfigMap
+  #   metadata:
+  #     name: example-configmap
+  #   data:
+  #     key: value
+
+# Additional containers to run in the same pod as the main satellite container
+sidecars: []

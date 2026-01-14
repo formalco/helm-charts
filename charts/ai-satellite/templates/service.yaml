@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "ai-satellite.fullname" . }}
+  labels:
+    {{- include "ai-satellite.labels" . | nindent 4 }}
+spec:
+  type: ClusterIP
+  ports:
+    {{- range .Values.ports }}
+    - port: {{ .port }}
+      targetPort: {{ .name }}
+      protocol: TCP
+      name: {{ .name }}
+    {{- end }}
+    - port: 8080
+      targetPort: health
+      protocol: TCP
+      name: health
+  selector:
+    {{- include "ai-satellite.selectorLabels" . | nindent 4 }}

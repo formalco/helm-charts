@@ -1,0 +1,5 @@
+apiVersion: v2
+name: data-discovery-satellite
+description: The Formal Data Discovery Satellite indexes the schemas of datastores within your environment.
+type: application
+version: 0.1.0
