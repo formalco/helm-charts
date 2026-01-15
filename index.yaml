@@ -1,5 +1,16 @@
 apiVersion: v1
 entries:
+  ai-satellite:
+  - apiVersion: v2
+    created: "2026-01-15T00:04:14.082194312Z"
+    description: The Formal AI Satellite serves AI features and inference inside your
+      environment.
+    digest: 1923ee7ab2f4a6810bb0b1f29631f2149cdd4f37c61838673d8e03545c03cb1f
+    name: ai-satellite
+    type: application
+    urls:
+    - https://github.com/formalco/helm-charts/releases/download/ai-satellite-0.10.0/ai-satellite-0.10.0.tgz
+    version: 0.10.0
   connector:
   - apiVersion: v2
     created: "2025-10-31T16:34:42.003462396Z"
@@ -122,6 +133,17 @@ entries:
     urls:
     - https://github.com/formalco/helm-charts/releases/download/connector-0.1.0/connector-0.1.0.tgz
     version: 0.1.0
+  data-discovery-satellite:
+  - apiVersion: v2
+    created: "2026-01-15T00:04:14.403335556Z"
+    description: The Formal Data Discovery Satellite indexes the schemas of datastores
+      within your environment.
+    digest: ecb052f3fefbfa8170bd109d2b5a4cfb0741b6f3e7839c16ff022044fc638db4
+    name: data-discovery-satellite
+    type: application
+    urls:
+    - https://github.com/formalco/helm-charts/releases/download/data-discovery-satellite-0.1.0/data-discovery-satellite-0.1.0.tgz
+    version: 0.1.0
   ecr-cred:
   - apiVersion: v2
     created: "2025-10-31T16:35:49.976321578Z"
@@ -165,4 +187,4 @@ entries:
     urls:
     - https://github.com/formalco/helm-charts/releases/download/formal-connector-0.1.0/formal-connector-0.1.0.tgz
     version: 0.1.0
-generated: "2025-10-31T16:35:49.97634065Z"
+generated: "2026-01-15T00:04:14.403368952Z"
