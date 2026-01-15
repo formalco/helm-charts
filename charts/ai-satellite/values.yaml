@@ -1,0 +1,45 @@
+nameOverride: ""
+fullnameOverride: ""
+
+# API key for the AI Satellite configured in Formal Control Plane
+formalAPIKey: ""
+
+# Set to true if you're deploying outside AWS and use the ECR
+# credentials job (ecr-cred Helm chart) to fetch ECR credentials
+pullWithCredentials: false
+
+image:
+  repository: 654654333078.dkr.ecr.us-east-1.amazonaws.com/formalco-prod-ai-satellite
+  pullPolicy: Always
+  tag: "latest"
+
+replicaCount: 1
+resources:
+  requests:
+    cpu: 4
+    memory: 8Gi
+    nvidia.com/gpu: 1
+  limits:
+    cpu: 8
+    memory: 16Gi
+    # Requires a NVIDIA GPU with at least 48GB VRAM.
+    nvidia.com/gpu: 1
+
+securityContext: {}
+podSecurityContext: {}
+env: {}
+podAnnotations:
+  cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+tolerations: []
+
+# Extra manifests to deploy as an array of objects
+extraManifests: []
+  # - apiVersion: v1
+  #   kind: ConfigMap
+  #   metadata:
+  #     name: example-configmap
+  #   data:
+  #     key: value
+
+# Additional containers to run in the same pod as the main satellite container
+sidecars: []
