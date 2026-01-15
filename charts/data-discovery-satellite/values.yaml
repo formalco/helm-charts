@@ -16,11 +16,11 @@ image:
 replicaCount: 2
 resources:
   requests:
-    cpu: 4
-    memory: 8Gi
+    cpu: 1
+    memory: 2Gi
   limits:
-    cpu: 8
-    memory: 16Gi
+    cpu: 2
+    memory: 4Gi
 
 securityContext: {}
 podSecurityContext: {}
