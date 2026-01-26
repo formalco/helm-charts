@@ -135,6 +135,16 @@ entries:
     version: 0.1.0
   data-discovery-satellite:
   - apiVersion: v2
+    created: "2026-01-26T23:08:11.2493463Z"
+    description: The Formal Data Discovery Satellite indexes the schemas of datastores
+      within your environment.
+    digest: 08c9b4048d9765def45c25d335bd3cbebdc30fd248c323d5f0ee353fde26e5ca
+    name: data-discovery-satellite
+    type: application
+    urls:
+    - https://github.com/formalco/helm-charts/releases/download/data-discovery-satellite-0.2.0/data-discovery-satellite-0.2.0.tgz
+    version: 0.2.0
+  - apiVersion: v2
     created: "2026-01-15T00:04:14.403335556Z"
     description: The Formal Data Discovery Satellite indexes the schemas of datastores
       within your environment.
@@ -187,4 +197,4 @@ entries:
     urls:
     - https://github.com/formalco/helm-charts/releases/download/formal-connector-0.1.0/formal-connector-0.1.0.tgz
     version: 0.1.0
-generated: "2026-01-15T00:04:14.403368952Z"
+generated: "2026-01-26T23:08:11.249384942Z"
