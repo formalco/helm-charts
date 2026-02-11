@@ -53,6 +53,38 @@ spec:
             {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          {{- $startupProbe := .Values.startupProbe | default dict }}
+          {{- if ne $startupProbe.enabled false }}
+          startupProbe:
+            httpGet:
+              path: {{ $startupProbe.path | default "/ready" }}
+              port: {{ $startupProbe.port | default 8080 }}
+            periodSeconds: {{ $startupProbe.periodSeconds | default 5 }}
+            timeoutSeconds: {{ $startupProbe.timeoutSeconds | default 1 }}
+            failureThreshold: {{ $startupProbe.failureThreshold | default 24 }}
+          {{- end }}
+          {{- $readinessProbe := .Values.readinessProbe | default dict }}
+          {{- if ne $readinessProbe.enabled false }}
+          readinessProbe:
+            httpGet:
+              path: {{ $readinessProbe.path | default "/ready" }}
+              port: {{ $readinessProbe.port | default 8080 }}
+            initialDelaySeconds: {{ $readinessProbe.initialDelaySeconds | default 0 }}
+            periodSeconds: {{ $readinessProbe.periodSeconds | default 5 }}
+            timeoutSeconds: {{ $readinessProbe.timeoutSeconds | default 1 }}
+            failureThreshold: {{ $readinessProbe.failureThreshold | default 3 }}
+          {{- end }}
+          {{- $livenessProbe := .Values.livenessProbe | default dict }}
+          {{- if $livenessProbe.enabled }}
+          livenessProbe:
+            httpGet:
+              path: {{ $livenessProbe.path | default "/health" }}
+              port: {{ $livenessProbe.port | default 8080 }}
+            initialDelaySeconds: {{ $livenessProbe.initialDelaySeconds | default 0 }}
+            periodSeconds: {{ $livenessProbe.periodSeconds | default 5 }}
+            timeoutSeconds: {{ $livenessProbe.timeoutSeconds | default 1 }}
+            failureThreshold: {{ $livenessProbe.failureThreshold | default 3 }}
+          {{- end }}
           {{- with .Values.volumeMounts }}
           volumeMounts:
             {{- toYaml . | nindent 12 }}
