@@ -15,6 +15,7 @@ This repository contains Helm Charts to deploy Formal on your Kubernetes cluster
 | [connector](charts/connector) | Formal Connector base Helm chart.                                                                                               |
 | [data-discovery-satellite](charts/data-discovery-satellite) | Data Discovery Satellite Helm chart.                                                     |
 | [ai-satellite](charts/ai-satellite) | AI Satellite Helm chart (requires NVIDIA GPU). |
+| [kubernetes-operator](charts/kubernetes-operator) | Formal Kubernetes Operator. Automatically registers in-cluster services as Formal resources.                    |
 | [ecr-cred](charts/ecr-cred)   | ECR credentials job. Required for non-AWS environments. Requires `pullWithCredentials=true` in the Connector Helm chart values. |
 
 ## Using the Helm Repository
