@@ -1,0 +1,30 @@
+nameOverride: ""
+fullnameOverride: ""
+
+# API key for the Formal Control Plane
+formalAPIKey: ""
+
+# Set to true if you're deploying outside AWS and use the ECR
+# credentials job (ecr-cred Helm chart) to fetch ECR credentials
+pullWithCredentials: false
+
+image:
+  repository: 654654333078.dkr.ecr.eu-west-1.amazonaws.com/formalco-prod-kubernetes-operator
+  pullPolicy: Always
+  tag: "latest"
+
+replicaCount: 1
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 500m
+    memory: 256Mi
+
+metricsPort: 8080
+
+securityContext: {}
+podSecurityContext: {}
+podAnnotations: {}
+tolerations: []
