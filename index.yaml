@@ -13,6 +13,16 @@ entries:
     version: 0.10.0
   connector:
   - apiVersion: v2
+    created: "2026-02-20T20:39:47.810473889Z"
+    description: The Formal Connector is a protocol-aware proxy that provides visibility
+      and control over the flow of data between your resources and users.
+    digest: 47f09b33e9735bdf9a159641021807b055bd26f509eaa95f618f9df3c1cb63c1
+    name: connector
+    type: application
+    urls:
+    - https://github.com/formalco/helm-charts/releases/download/connector-0.12.0/connector-0.12.0.tgz
+    version: 0.12.0
+  - apiVersion: v2
     created: "2026-01-27T21:37:18.696700014Z"
     description: The Formal Connector is a protocol-aware proxy that provides visibility
       and control over the flow of data between your resources and users.
@@ -218,4 +228,4 @@ entries:
     urls:
     - https://github.com/formalco/helm-charts/releases/download/kubernetes-operator-0.1.0/kubernetes-operator-0.1.0.tgz
     version: 0.1.0
-generated: "2026-02-18T14:48:53.877052239Z"
+generated: "2026-02-20T20:39:47.810615123Z"
