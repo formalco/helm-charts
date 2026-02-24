@@ -37,6 +37,65 @@ spec:
             type: object
           spec:
             properties:
+              httpApiKey:
+                properties:
+                  key:
+                    type: string
+                  location:
+                    type: string
+                  secretRef:
+                    properties:
+                      key:
+                        type: string
+                      name:
+                        type: string
+                    required:
+                    - key
+                    - name
+                    type: object
+                required:
+                - key
+                - location
+                - secretRef
+                type: object
+              httpBasic:
+                properties:
+                  header:
+                    type: string
+                  secretRef:
+                    properties:
+                      keys:
+                        additionalProperties:
+                          type: string
+                        type: object
+                      name:
+                        type: string
+                    required:
+                    - keys
+                    - name
+                    type: object
+                required:
+                - header
+                - secretRef
+                type: object
+              httpBearer:
+                properties:
+                  header:
+                    type: string
+                  secretRef:
+                    properties:
+                      key:
+                        type: string
+                      name:
+                        type: string
+                    required:
+                    - key
+                    - name
+                    type: object
+                required:
+                - header
+                - secretRef
+                type: object
               iam:
                 properties:
                   cloudProvider:
@@ -48,6 +107,13 @@ spec:
                 required:
                 - cloudProvider
                 - username
+                type: object
+              kubernetes:
+                properties:
+                  kubeconfigEnv:
+                    type: string
+                required:
+                - kubeconfigEnv
                 type: object
               resourceRef:
                 type: string
@@ -62,6 +128,24 @@ spec:
                 required:
                 - keys
                 - name
+                type: object
+              snowflakeKey:
+                properties:
+                  secretRef:
+                    properties:
+                      key:
+                        type: string
+                      name:
+                        type: string
+                    required:
+                    - key
+                    - name
+                    type: object
+                  username:
+                    type: string
+                required:
+                - secretRef
+                - username
                 type: object
               sshKey:
                 properties:
