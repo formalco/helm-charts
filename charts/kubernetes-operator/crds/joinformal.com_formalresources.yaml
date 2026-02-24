@@ -42,6 +42,8 @@ spec:
               port:
                 format: int32
                 type: integer
+              spaceId:
+                type: string
               technology:
                 type: string
               tls:
