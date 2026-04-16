@@ -1,0 +1,5 @@
+apiVersion: v2
+name: policy-data-loader-satellite
+description: The Formal Policy Data Loader Satellite executes customer-defined code to load arbitrary external data into connector context.
+type: application
+version: 0.1.0

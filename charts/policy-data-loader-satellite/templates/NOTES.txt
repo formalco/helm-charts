@@ -1,0 +1,5 @@
+The Policy Data Loader Satellite has been deployed.
+
+Add the following hostname to the Satellite in the Formal Control Plane:
+
+  {{ include "policy-data-loader-satellite.fullname" . }}.{{ .Release.Namespace }}.svc.cluster.local
