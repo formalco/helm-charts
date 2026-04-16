@@ -76,7 +76,7 @@ tolerations: []
 rbac:
   create: true
 
-# Set to `create` to false and provide your own service account name if you
+# Set `create` to false and provide your own service account name if you
 # don't want this chart to create one
 serviceAccount:
   create: true
