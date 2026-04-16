@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "policy-data-loader-satellite.fullname" . }}
+  labels:
+    {{- include "policy-data-loader-satellite.labels" . | nindent 4 }}
+spec:
+  type: ClusterIP
+  ports:
+    - port: 50056
+      targetPort: grpc
+      protocol: TCP
+      name: grpc
+  selector:
+    {{- include "policy-data-loader-satellite.selectorLabels" . | nindent 6 }}
