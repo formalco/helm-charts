@@ -9,7 +9,7 @@ formalAPIKey: ""
 pullWithCredentials: false
 
 image:
-  repository: 654654333078.dkr.ecr.eu-west-1.amazonaws.com/formalco-prod-connector
+  repository: 654654333078.dkr.ecr.us-east-1.amazonaws.com/formalco-prod-connector
   pullPolicy: Always
   tag: "latest"
 
