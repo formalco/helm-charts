@@ -2,7 +2,7 @@
 Expand the name of the chart.
 */}}
 {{- define "ai-satellite.name" -}}
-{{- printf "formal-%s" (default .Chart.Name .Values.nameOverride | trunc 57 | trimSuffix "-") }}
+{{- printf "formal-%s" (default .Chart.Name .Values.nameOverride | trunc 56 | trimSuffix "-") }}
 {{- end }}
 
 {{/*
@@ -12,7 +12,7 @@ If release name contains chart name it will be used as a full name.
 */}}
 {{- define "ai-satellite.fullname" -}}
 {{- if .Values.fullnameOverride }}
-{{- printf "formal-%s" (.Values.fullnameOverride | trunc 57 | trimSuffix "-") }}
+{{- printf "formal-%s" (.Values.fullnameOverride | trunc 56 | trimSuffix "-") }}
 {{- else }}
 {{- printf "formal-ai-satellite" }}
 {{- end }}

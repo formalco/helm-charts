@@ -2,7 +2,7 @@
 Expand the name of the chart.
 */}}
 {{- define "connector.name" -}}
-{{- printf "formal-%s" (default .Chart.Name .Values.nameOverride | trunc 57 | trimSuffix "-") }}
+{{- printf "formal-%s" (default .Chart.Name .Values.nameOverride | trunc 56 | trimSuffix "-") }}
 {{- end }}
 
 {{/*
@@ -12,7 +12,7 @@ If release name contains chart name it will be used as a full name.
 */}}
 {{- define "connector.fullname" -}}
 {{- if .Values.fullnameOverride }}
-{{- printf "formal-%s" (.Values.fullnameOverride | trunc 57 | trimSuffix "-") }}
+{{- printf "formal-%s" (.Values.fullnameOverride | trunc 56 | trimSuffix "-") }}
 {{- else }}
 {{- printf "formal-connector" }}
 {{- end }}
