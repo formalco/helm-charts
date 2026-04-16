@@ -2,7 +2,7 @@
 Expand the name of the chart.
 */}}
 {{- define "kubernetes-operator.name" -}}
-{{- printf "formal-%s" (default .Chart.Name .Values.nameOverride | trunc 57 | trimSuffix "-") }}
+{{- printf "formal-%s" (default .Chart.Name .Values.nameOverride | trunc 56 | trimSuffix "-") }}
 {{- end }}
 
 {{/*
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 */}}
 {{- define "kubernetes-operator.fullname" -}}
 {{- if .Values.fullnameOverride }}
-{{- printf "formal-%s" (.Values.fullnameOverride | trunc 57 | trimSuffix "-") }}
+{{- printf "formal-%s" (.Values.fullnameOverride | trunc 56 | trimSuffix "-") }}
 {{- else }}
 {{- printf "formal-kubernetes-operator" }}
 {{- end }}
