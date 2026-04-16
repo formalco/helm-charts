@@ -238,4 +238,15 @@ entries:
     urls:
     - https://github.com/formalco/helm-charts/releases/download/kubernetes-operator-0.1.0/kubernetes-operator-0.1.0.tgz
     version: 0.1.0
-generated: "2026-02-24T15:49:12.093012497Z"
+  policy-data-loader-satellite:
+  - apiVersion: v2
+    created: "2026-04-16T17:33:27.169556249Z"
+    description: The Formal Policy Data Loader Satellite executes customer-defined
+      code to load arbitrary external data into connector context.
+    digest: 8bf778ba35f0838c4675330a9eeb41b0ed00ca7bbeff5931b87cb68f9fd1e7f4
+    name: policy-data-loader-satellite
+    type: application
+    urls:
+    - https://github.com/formalco/helm-charts/releases/download/policy-data-loader-satellite-0.1.0/policy-data-loader-satellite-0.1.0.tgz
+    version: 0.1.0
+generated: "2026-04-16T17:33:27.169616673Z"
