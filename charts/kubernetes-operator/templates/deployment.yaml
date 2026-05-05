@@ -42,6 +42,10 @@ spec:
                   key: formal-api-key
             - name: METRICS_ADDR
               value: ":{{ .Values.metricsPort }}"
+            {{- with .Values.reconcileInterval }}
+            - name: RECONCILE_INTERVAL
+              value: {{ . | quote }}
+            {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- if .Values.pullWithCredentials }}

@@ -24,6 +24,10 @@ resources:
 
 metricsPort: 8080
 
+# How often the operator reconciles resources (e.g. "5m", "30s").
+# Leave empty to use the operator's default (10m).
+reconcileInterval: ""
+
 securityContext: {}
 podSecurityContext: {}
 podAnnotations: {}
