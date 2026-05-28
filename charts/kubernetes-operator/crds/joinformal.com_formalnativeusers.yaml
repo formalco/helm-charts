@@ -108,6 +108,20 @@ spec:
                 - cloudProvider
                 - username
                 type: object
+              identityLinks:
+                items:
+                  properties:
+                    name:
+                      type: string
+                    terminationProtection:
+                      type: boolean
+                    type:
+                      type: string
+                  required:
+                  - name
+                  - type
+                  type: object
+                type: array
               kubernetes:
                 properties:
                   kubeconfigEnv:
@@ -228,6 +242,24 @@ spec:
                   - message
                   - reason
                   - status
+                  - type
+                  type: object
+                type: array
+              identityLinks:
+                items:
+                  properties:
+                    identityId:
+                      type: string
+                    linkId:
+                      type: string
+                    name:
+                      type: string
+                    type:
+                      type: string
+                  required:
+                  - identityId
+                  - linkId
+                  - name
                   - type
                   type: object
                 type: array
