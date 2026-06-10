@@ -24,7 +24,6 @@ resources:
 
 securityContext: {}
 podSecurityContext: {}
-env: {}
 podAnnotations:
   cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
 tolerations: []
@@ -34,6 +33,19 @@ tolerations: []
 serviceAccount:
   create: true
   name: ""
+
+# Extra environment variables for the Data Discovery Satellite container.
+# A raw list of Kubernetes env entries, so values can come from a
+# literal or from a Secret/ConfigMap via valueFrom.
+#   env:
+#     - name: KEY_1
+#       value: "literal-value"
+#     - name: KEY_2
+#       valueFrom:
+#         secretKeyRef:
+#           name: my-secret
+#           key: key2
+env: []
 
 # Extra manifests to deploy as an array of objects
 extraManifests: []
