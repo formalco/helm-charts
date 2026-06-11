@@ -47,9 +47,11 @@ spec:
                 secretKeyRef:
                   name: {{ include "connector.fullname" . }}
                   key: formal-api-key
-            {{- range $key, $value := .Values.env }}
-            - name: {{ $key }}
-              value: {{ $value | quote }}
+            {{- if and .Values.env (not (kindIs "slice" .Values.env)) }}
+            {{- fail "`.Values.env` must be a list of env entries (e.g. `- name: FOO` with `value:` or `valueFrom:`). The old map form (`env: {FOO: bar}`) is no longer supported; see values.yaml for an example." }}
+            {{- end }}
+            {{- with .Values.env }}
+            {{- toYaml . | nindent 12 }}
             {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
