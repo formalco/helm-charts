@@ -59,7 +59,7 @@ spec:
           {{- if ne $startupProbe.enabled false }}
           startupProbe:
             httpGet:
-              path: {{ $startupProbe.path | default "/ready" }}
+              path: {{ $startupProbe.path | default "/health" }}
               port: {{ $startupProbe.port | default 8080 }}
             periodSeconds: {{ $startupProbe.periodSeconds | default 5 }}
             timeoutSeconds: {{ $startupProbe.timeoutSeconds | default 1 }}
