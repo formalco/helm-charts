@@ -13,6 +13,8 @@ rules:
     - formallisteners/status
     - formalnativeusers
     - formalnativeusers/status
+    - formalpolicies
+    - formalpolicies/status
   verbs: ["get", "list", "watch", "create", "update", "patch"]
 - apiGroups: [""]
   resources: ["secrets"]
