@@ -27,6 +27,14 @@ ports:
   #   port: 22
 
 replicaCount: 2
+
+# Deployment update strategy. Kubernetes defaults to RollingUpdate, which starts
+# the replacement pod before terminating the old one. Set Recreate if the log
+# spool volume below is a ReadWriteOnce PVC, as the replacement pod cannot
+# attach a volume the old pod still holds.
+strategy: {}
+  # type: Recreate
+
 resources:
   requests:
     cpu: 1
