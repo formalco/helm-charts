@@ -2,6 +2,16 @@ apiVersion: v1
 entries:
   ai-satellite:
   - apiVersion: v2
+    created: "2026-08-21T13:48:00.908762716Z"
+    description: The Formal AI Satellite serves AI features and inference inside your
+      environment.
+    digest: ec6e0947606dc29969235962592bafe432c732638811ff2ec7625d20f2654f55
+    name: ai-satellite
+    type: application
+    urls:
+    - https://github.com/formalco/helm-charts/releases/download/ai-satellite-0.12.0/ai-satellite-0.12.0.tgz
+    version: 0.12.0
+  - apiVersion: v2
     created: "2026-06-11T08:48:54.295467811Z"
     description: The Formal AI Satellite serves AI features and inference inside your
       environment.
@@ -22,6 +32,16 @@ entries:
     - https://github.com/formalco/helm-charts/releases/download/ai-satellite-0.10.0/ai-satellite-0.10.0.tgz
     version: 0.10.0
   connector:
+  - apiVersion: v2
+    created: "2026-08-21T13:48:01.085913188Z"
+    description: The Formal Connector is a protocol-aware proxy that provides visibility
+      and control over the flow of data between your resources and users.
+    digest: 62e6b94d1fdcefa321a7999fedb7c87d6f3131a3887cf28e9eebfd20603df856
+    name: connector
+    type: application
+    urls:
+    - https://github.com/formalco/helm-charts/releases/download/connector-0.16.0/connector-0.16.0.tgz
+    version: 0.16.0
   - apiVersion: v2
     created: "2026-08-05T15:59:29.452732537Z"
     description: The Formal Connector is a protocol-aware proxy that provides visibility
@@ -195,6 +215,16 @@ entries:
     version: 0.1.0
   data-discovery-satellite:
   - apiVersion: v2
+    created: "2026-08-21T13:48:01.234342013Z"
+    description: The Formal Data Discovery Satellite indexes the schemas of datastores
+      within your environment.
+    digest: 4de1d6eea1987c6c803ee5275b24ac4c4d0c119437d78715a102d2374427694c
+    name: data-discovery-satellite
+    type: application
+    urls:
+    - https://github.com/formalco/helm-charts/releases/download/data-discovery-satellite-0.4.0/data-discovery-satellite-0.4.0.tgz
+    version: 0.4.0
+  - apiVersion: v2
     created: "2026-06-11T08:48:54.830888Z"
     description: The Formal Data Discovery Satellite indexes the schemas of datastores
       within your environment.
@@ -225,6 +255,16 @@ entries:
     - https://github.com/formalco/helm-charts/releases/download/data-discovery-satellite-0.1.0/data-discovery-satellite-0.1.0.tgz
     version: 0.1.0
   ecr-cred:
+  - apiVersion: v2
+    created: "2026-08-21T13:48:01.400278203Z"
+    description: ECR credentials job. Required for non-AWS environments. Requires
+      `image.pullWithCredentials=true` in the Connector Helm chart values.
+    digest: cebac983d06b445118a7c53dc531aefc0b25e566584d6f8e45d0e88ad1829879
+    name: ecr-cred
+    type: application
+    urls:
+    - https://github.com/formalco/helm-charts/releases/download/ecr-cred-0.4.0/ecr-cred-0.4.0.tgz
+    version: 0.4.0
   - apiVersion: v2
     created: "2025-10-31T16:35:49.976321578Z"
     description: ECR credentials job. Required for non-AWS environments. Requires
@@ -268,6 +308,16 @@ entries:
     - https://github.com/formalco/helm-charts/releases/download/formal-connector-0.1.0/formal-connector-0.1.0.tgz
     version: 0.1.0
   kubernetes-operator:
+  - apiVersion: v2
+    created: "2026-08-21T13:48:01.53253445Z"
+    description: The Formal Kubernetes Operator automatically registers in-cluster
+      services as Formal resources with fully working connection paths.
+    digest: cbaaeccecd5930926e776fc7777e7cc0de518971956440a7476455549c4cdaf9
+    name: kubernetes-operator
+    type: application
+    urls:
+    - https://github.com/formalco/helm-charts/releases/download/kubernetes-operator-0.5.0/kubernetes-operator-0.5.0.tgz
+    version: 0.5.0
   - apiVersion: v2
     created: "2026-07-27T10:22:28.780059238Z"
     description: The Formal Kubernetes Operator automatically registers in-cluster
@@ -320,6 +370,16 @@ entries:
     version: 0.1.0
   policy-data-loader-satellite:
   - apiVersion: v2
+    created: "2026-08-21T13:48:01.703089088Z"
+    description: The Formal Policy Data Loader Satellite executes customer-defined
+      code to load arbitrary external data into connector context.
+    digest: d46f0adf74533106baf184ff68df5e32e7f511477e1413de47a582193de8a339
+    name: policy-data-loader-satellite
+    type: application
+    urls:
+    - https://github.com/formalco/helm-charts/releases/download/policy-data-loader-satellite-0.3.0/policy-data-loader-satellite-0.3.0.tgz
+    version: 0.3.0
+  - apiVersion: v2
     created: "2026-06-11T08:48:55.110894286Z"
     description: The Formal Policy Data Loader Satellite executes customer-defined
       code to load arbitrary external data into connector context.
@@ -339,4 +399,4 @@ entries:
     urls:
     - https://github.com/formalco/helm-charts/releases/download/policy-data-loader-satellite-0.1.0/policy-data-loader-satellite-0.1.0.tgz
     version: 0.1.0
-generated: "2026-08-05T15:59:29.452817285Z"
+generated: "2026-08-21T13:48:01.70321371Z"
