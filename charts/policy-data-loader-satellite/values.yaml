@@ -26,6 +26,8 @@ securityContext: {}
 podSecurityContext: {}
 podAnnotations:
   cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+nodeSelector: {}
+affinity: {}
 tolerations: []
 
 # Set `create` to false and provide your own service account name if you

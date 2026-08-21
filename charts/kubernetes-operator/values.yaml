@@ -31,4 +31,6 @@ reconcileInterval: ""
 securityContext: {}
 podSecurityContext: {}
 podAnnotations: {}
+nodeSelector: {}
+affinity: {}
 tolerations: []

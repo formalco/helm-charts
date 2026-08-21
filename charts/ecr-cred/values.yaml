@@ -15,4 +15,6 @@ registryUrl: 654654333078.dkr.ecr.us-east-1.amazonaws.com
 successfulJobsHistoryLimit: 3
 failedJobsHistoryLimit: 1
 
+nodeSelector: {}
+affinity: {}
 tolerations: []
