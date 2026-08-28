@@ -4,8 +4,8 @@ fullnameOverride: ""
 # API key for the Formal Control Plane
 formalAPIKey: ""
 
-# Set to true if you're deploying outside AWS and use the ECR
-# credentials job (ecr-cred Helm chart) to fetch ECR credentials
+# Set to true when using the ecr-cred or azure-gar-cred Helm chart
+# to manage the Formal image pull secret.
 pullWithCredentials: false
 
 image:

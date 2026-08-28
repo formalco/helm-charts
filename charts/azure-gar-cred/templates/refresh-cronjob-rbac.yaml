@@ -1,0 +1,48 @@
+{{- $clientId := required "azure.clientId is required (use the managed identity client ID, not its object ID)" .Values.azure.clientId -}}
+{{- $tenantId := required "azure.tenantId is required" .Values.azure.tenantId -}}
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: formal-gar-secret-manager
+  labels:
+    {{- include "azure-gar-cred.labels" . | nindent 4 }}
+  annotations:
+    azure.workload.identity/client-id: {{ $clientId | quote }}
+    azure.workload.identity/tenant-id: {{ $tenantId | quote }}
+    "helm.sh/hook": pre-install,pre-upgrade
+    "helm.sh/hook-weight": "-15"
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: formal-gar-secret-manager
+  labels:
+    {{- include "azure-gar-cred.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": pre-install,pre-upgrade
+    "helm.sh/hook-weight": "-15"
+rules:
+  - apiGroups: [""]
+    resources: ["secrets"]
+    verbs: ["get", "patch", "update"]
+    resourceNames: ["formal-ecr-secret"]
+  - apiGroups: [""]
+    resources: ["secrets"]
+    verbs: ["create"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: formal-gar-secret-manager
+  labels:
+    {{- include "azure-gar-cred.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": pre-install,pre-upgrade
+    "helm.sh/hook-weight": "-15"
+subjects:
+  - kind: ServiceAccount
+    name: formal-gar-secret-manager
+roleRef:
+  kind: Role
+  name: formal-gar-secret-manager
+  apiGroup: rbac.authorization.k8s.io
