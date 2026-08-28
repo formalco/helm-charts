@@ -31,6 +31,18 @@ entries:
     urls:
     - https://github.com/formalco/helm-charts/releases/download/ai-satellite-0.10.0/ai-satellite-0.10.0.tgz
     version: 0.10.0
+  azure-gar-cred:
+  - apiVersion: v2
+    created: "2026-08-28T18:03:38.356746544Z"
+    description: GAR credentials job for AKS. Required when pulling Formal images
+      from GAR and requires `pullWithCredentials=true` in the Connector and Satellite
+      Helm chart values.
+    digest: b13e6fae886a97a84f67335892a9348ecfcb340a95d7185e158ee93bf350739a
+    name: azure-gar-cred
+    type: application
+    urls:
+    - https://github.com/formalco/helm-charts/releases/download/azure-gar-cred-0.1.0/azure-gar-cred-0.1.0.tgz
+    version: 0.1.0
   connector:
   - apiVersion: v2
     created: "2026-08-21T13:48:01.085913188Z"
@@ -399,4 +411,4 @@ entries:
     urls:
     - https://github.com/formalco/helm-charts/releases/download/policy-data-loader-satellite-0.1.0/policy-data-loader-satellite-0.1.0.tgz
     version: 0.1.0
-generated: "2026-08-21T13:48:01.70321371Z"
+generated: "2026-08-28T18:03:39.131772899Z"
