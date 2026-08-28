@@ -1,5 +1,5 @@
 apiVersion: v2
 name: azure-gar-cred
-description: GAR credentials job for AKS. Required when pulling Formal images from GAR and requires `pullWithCredentials=true` in the Connector and Satellite Helm chart values.
+description: GAR credentials job for AKS. Required when pulling Formal images from GAR with `pullWithCredentials=true` in workload chart values.
 type: application
 version: 0.1.0

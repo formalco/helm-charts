@@ -15,8 +15,7 @@ refresh CronJob.
 - A dedicated customer-managed user-assigned identity is available for image
   pulls.
 - Formal has enabled that identity to impersonate a GAR pull service account.
-- `pullWithCredentials: true` is set on each Connector or Satellite chart that
-  pulls a Formal image.
+- `pullWithCredentials: true` is set on each Formal workload chart.
 
 Do not create Google service accounts, workload identity pools, providers, or
 IAM bindings. Formal manages the Google Cloud resources.
@@ -78,8 +77,19 @@ gcp:
 schedule: "*/30 * * * *"
 ```
 
-Install this chart before the Connector and Satellite charts so the pre-install
-hook creates `formal-ecr-secret` before those workloads start:
+This chart creates registry credentials but does not change workload image
+settings. Configure each workload chart to use its GAR repository:
+
+```yaml
+image:
+  repository: us-docker.pkg.dev/formal-public-assets/formalco-prod-connector/formalco-prod-connector
+pullWithCredentials: true
+```
+
+Use the corresponding GAR repository for each Satellite or Kubernetes Operator.
+
+Install this chart before the workload charts. Its pre-install hook creates
+`formal-ecr-secret` before those workloads start:
 
 ```sh
 helm upgrade --install formal-azure-gar-cred formal/azure-gar-cred \
