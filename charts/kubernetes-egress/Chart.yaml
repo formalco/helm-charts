@@ -1,0 +1,6 @@
+apiVersion: v2
+name: kubernetes-egress
+description: Inject Formal Kubernetes Egress as a sidecar using a mutating admission policy.
+type: application
+version: 0.1.0
+kubeVersion: ">=1.36.0-0"

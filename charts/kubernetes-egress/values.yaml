@@ -1,0 +1,16 @@
+# Native sidecar image. Build from desktop/Dockerfile.linux-endpoint.
+sidecar:
+  image:
+    repository: 654654333078.dkr.ecr.us-east-1.amazonaws.com/formalco-prod-kubernetes-egress
+    pullPolicy: Always
+    tag: "latest"
+  resources:
+    requests:
+      cpu: 1
+      memory: 2Gi
+    limits:
+      cpu: 2
+      memory: 4Gi
+
+# Set true when using the ecr-cred or azure-gar-cred chart.
+pullWithCredentials: false

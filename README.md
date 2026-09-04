@@ -17,6 +17,7 @@ This repository contains Helm Charts to deploy Formal on your Kubernetes cluster
 | [ai-satellite](charts/ai-satellite) | AI Satellite Helm chart (requires NVIDIA GPU). |
 | [policy-data-loader-satellite](charts/policy-data-loader-satellite) | Policy Data Loader Satellite Helm chart. |
 | [kubernetes-operator](charts/kubernetes-operator) | Formal Kubernetes Operator. Automatically registers in-cluster services as Formal resources.                    |
+| [kubernetes-egress](charts/kubernetes-egress) | Inject Formal Kubernetes Egress as a sidecar using a mutating admission policy. Requires Kubernetes 1.36+. |
 | [ecr-cred](charts/ecr-cred)   | ECR credentials job. Required when pulling Formal images from ECR outside AWS. Requires `pullWithCredentials=true` in workload chart values. |
 | [azure-gar-cred](charts/azure-gar-cred) | GAR credentials job for AKS using Azure Workload Identity and GCP WIF. Requires `pullWithCredentials=true` in workload chart values. |
 
