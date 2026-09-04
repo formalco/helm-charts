@@ -22,10 +22,13 @@ resources:
     cpu: 500m
     memory: 256Mi
 
+# Written to the operator ConfigMap as metricsAddr. Override at runtime
+# with METRICS_ADDR.
 metricsPort: 8080
 
-# How often the operator reconciles resources (e.g. "5m", "30s").
-# Leave empty to use the operator's default (10m).
+# Written to the operator ConfigMap as reconcileInterval (e.g. "5m", "30s").
+# Leave empty to use the operator's default (10m). Override at runtime
+# with RECONCILE_INTERVAL.
 reconcileInterval: ""
 
 securityContext: {}
