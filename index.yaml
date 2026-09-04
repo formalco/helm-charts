@@ -333,6 +333,16 @@ entries:
     version: 0.1.0
   kubernetes-operator:
   - apiVersion: v2
+    created: "2026-09-04T22:24:18.596916923Z"
+    description: The Formal Kubernetes Operator automatically registers in-cluster
+      services as Formal resources with fully working connection paths.
+    digest: 8bbfa4d9d20e09904acafaa065d623946dcfdaa8e2f581775dbd922bbd496aca
+    name: kubernetes-operator
+    type: application
+    urls:
+    - https://github.com/formalco/helm-charts/releases/download/kubernetes-operator-0.6.0/kubernetes-operator-0.6.0.tgz
+    version: 0.6.0
+  - apiVersion: v2
     created: "2026-08-21T13:48:01.53253445Z"
     description: The Formal Kubernetes Operator automatically registers in-cluster
       services as Formal resources with fully working connection paths.
@@ -423,4 +433,4 @@ entries:
     urls:
     - https://github.com/formalco/helm-charts/releases/download/policy-data-loader-satellite-0.1.0/policy-data-loader-satellite-0.1.0.tgz
     version: 0.1.0
-generated: "2026-09-04T21:13:09.090367547Z"
+generated: "2026-09-04T22:24:18.596964424Z"
