@@ -319,6 +319,18 @@ entries:
     urls:
     - https://github.com/formalco/helm-charts/releases/download/formal-connector-0.1.0/formal-connector-0.1.0.tgz
     version: 0.1.0
+  kubernetes-egress:
+  - apiVersion: v2
+    created: "2026-09-04T21:13:09.090301899Z"
+    description: Inject Formal Kubernetes Egress as a sidecar using a mutating admission
+      policy.
+    digest: 1c0c81cf9047e301cf4ce710c9ebf8a8e5f0f640a935ffa6eadb6d9078864e5b
+    kubeVersion: '>=1.36.0-0'
+    name: kubernetes-egress
+    type: application
+    urls:
+    - https://github.com/formalco/helm-charts/releases/download/kubernetes-egress-0.1.0/kubernetes-egress-0.1.0.tgz
+    version: 0.1.0
   kubernetes-operator:
   - apiVersion: v2
     created: "2026-08-21T13:48:01.53253445Z"
@@ -411,4 +423,4 @@ entries:
     urls:
     - https://github.com/formalco/helm-charts/releases/download/policy-data-loader-satellite-0.1.0/policy-data-loader-satellite-0.1.0.tgz
     version: 0.1.0
-generated: "2026-08-28T18:03:39.131772899Z"
+generated: "2026-09-04T21:13:09.090367547Z"
