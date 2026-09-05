@@ -1,3 +1,5 @@
+{{- include "kubernetes-operator.validateAuth" . }}
+{{- $oidcSources := compact (splitList "," (include "kubernetes-operator.oidcSources" .)) }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -13,6 +15,9 @@ spec:
     metadata:
       labels:
         {{- include "kubernetes-operator.selectorLabels" . | nindent 8 }}
+        {{- if has "azure" $oidcSources }}
+        azure.workload.identity/use: "true"
+        {{- end }}
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
         {{- with .Values.podAnnotations }}
@@ -38,11 +43,13 @@ spec:
           env:
             - name: FORMAL_CONFIG
               value: /etc/formal/config.yaml
+            {{- if .Values.formalAPIKey }}
             - name: FORMAL_API_KEY
               valueFrom:
                 secretKeyRef:
                   name: {{ include "kubernetes-operator.fullname" . }}
                   key: formal-api-key
+            {{- end }}
           volumeMounts:
             - name: config
               mountPath: /etc/formal

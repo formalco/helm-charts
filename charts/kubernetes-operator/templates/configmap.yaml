@@ -10,3 +10,11 @@ data:
     {{- with .Values.reconcileInterval }}
     reconcileInterval: {{ . | quote }}
     {{- end }}
+    {{- $sources := compact (splitList "," (include "kubernetes-operator.oidcSources" .)) }}
+    {{- if gt (len $sources) 0 }}
+    oidc:
+      integration_id: {{ .Values.oidc.integration_id | quote }}
+      {{- range $sources }}
+      {{ . }}: {}
+      {{- end }}
+    {{- end }}

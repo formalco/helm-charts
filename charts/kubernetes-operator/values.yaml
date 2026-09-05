@@ -1,8 +1,16 @@
 nameOverride: ""
 fullnameOverride: ""
 
-# API key for the Formal Control Plane
+# API key for the Formal Control Plane. Mutually exclusive with oidc.
 formalAPIKey: ""
+
+# OIDC written to the ConfigMap. Mutually exclusive with formalAPIKey.
+# Set integration_id and exactly one source object (aws: {} or azure: {}).
+oidc:
+  integration_id: ""
+
+serviceAccount:
+  annotations: {}
 
 # Set to true when using the ecr-cred or azure-gar-cred Helm chart
 # to manage the Formal image pull secret.
