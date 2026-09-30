@@ -19,7 +19,8 @@ pullWithCredentials: false
 image:
   repository: 654654333078.dkr.ecr.us-east-1.amazonaws.com/formalco-prod-kubernetes-operator
   pullPolicy: Always
-  tag: "latest"
+  # Defaults to the chart's appVersion.
+  tag: ""
 
 replicaCount: 1
 resources:
