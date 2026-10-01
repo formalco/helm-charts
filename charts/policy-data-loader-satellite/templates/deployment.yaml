@@ -45,12 +45,25 @@ spec:
                 secretKeyRef:
                   name: {{ include "policy-data-loader-satellite.fullname" . }}
                   key: formal-api-key
-            {{- if and .Values.env (not (kindIs "slice" .Values.env)) }}
-            {{- fail "`.Values.env` must be a list of env entries (e.g. `- name: FOO` with `value:` or `valueFrom:`). The old map form (`env: {FOO: bar}`) is no longer supported; see values.yaml for an example." }}
-            {{- end }}
+            {{- if kindIs "slice" .Values.env }}
             {{- with .Values.env }}
             {{- toYaml . | nindent 12 }}
             {{- end }}
+            {{- else }}
+            {{- range $name, $value := .Values.env }}
+            {{- if kindIs "map" $value }}
+            - name: {{ $name }}
+              {{- toYaml $value | nindent 14 }}
+            {{- else if not (kindIs "invalid" $value) }}
+            - name: {{ $name }}
+              value: {{ $value | toString | quote }}
+            {{- end }}
+            {{- end }}
+            {{- end }}
+          {{- with .Values.envFrom }}
+          envFrom:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           {{- $readinessProbe := .Values.readinessProbe | default dict }}

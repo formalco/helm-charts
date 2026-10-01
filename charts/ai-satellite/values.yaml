@@ -33,18 +33,26 @@ nodeSelector: {}
 affinity: {}
 tolerations: []
 
-# Extra environment variables for the AI Satellite container.
-# A raw list of Kubernetes env entries, so values can come from a
-# literal or from a Secret/ConfigMap via valueFrom.
+# Extra environment variables for the AI Satellite container, keyed by
+# name. A value is either a literal or a Kubernetes env source such as
+# valueFrom. A raw list of Kubernetes env entries is also accepted.
 #   env:
-#     - name: KEY_1
-#       value: "literal-value"
-#     - name: KEY_2
+#     KEY_1: "literal-value"
+#     KEY_2:
 #       valueFrom:
 #         secretKeyRef:
 #           name: my-secret
 #           key: key2
-env: []
+env: {}
+
+# Load all keys of a Secret or ConfigMap as environment variables.
+# Variables set in `env` take precedence.
+#   envFrom:
+#     - secretRef:
+#         name: my-secret
+#     - configMapRef:
+#         name: my-configmap
+envFrom: []
 
 # Extra manifests to deploy as an array of objects
 extraManifests: []
