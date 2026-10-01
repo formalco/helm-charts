@@ -52,6 +52,17 @@ spec:
             {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          {{- $readinessProbe := .Values.readinessProbe | default dict }}
+          {{- if ne $readinessProbe.enabled false }}
+          readinessProbe:
+            httpGet:
+              path: {{ $readinessProbe.path | default "/ready" }}
+              port: {{ $readinessProbe.port | default 8080 }}
+            initialDelaySeconds: {{ $readinessProbe.initialDelaySeconds | default 0 }}
+            periodSeconds: {{ $readinessProbe.periodSeconds | default 5 }}
+            timeoutSeconds: {{ $readinessProbe.timeoutSeconds | default 1 }}
+            failureThreshold: {{ $readinessProbe.failureThreshold | default 3 }}
+          {{- end }}
         {{- with .Values.sidecars }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
