@@ -2,6 +2,16 @@ apiVersion: v1
 entries:
   ai-satellite:
   - apiVersion: v2
+    created: "2026-10-01T12:47:03.347407475Z"
+    description: The Formal AI Satellite serves AI features and inference inside your
+      environment.
+    digest: e57e6d8f4b07a03526130cc514d1d1de868bdda687800fdb51b250b655eee05d
+    name: ai-satellite
+    type: application
+    urls:
+    - https://github.com/formalco/helm-charts/releases/download/ai-satellite-0.14.0/ai-satellite-0.14.0.tgz
+    version: 0.14.0
+  - apiVersion: v2
     created: "2026-10-01T09:33:52.821808511Z"
     description: The Formal AI Satellite serves AI features and inference inside your
       environment.
@@ -54,6 +64,16 @@ entries:
     - https://github.com/formalco/helm-charts/releases/download/azure-gar-cred-0.1.0/azure-gar-cred-0.1.0.tgz
     version: 0.1.0
   connector:
+  - apiVersion: v2
+    created: "2026-10-01T12:47:03.662033448Z"
+    description: The Formal Connector is a protocol-aware proxy that provides visibility
+      and control over the flow of data between your resources and users.
+    digest: 6ce06acafc0d0a8d9ad979dbc1f68248186509c6e04bf528eb4cf6821c4ae379
+    name: connector
+    type: application
+    urls:
+    - https://github.com/formalco/helm-charts/releases/download/connector-0.17.0/connector-0.17.0.tgz
+    version: 0.17.0
   - apiVersion: v2
     created: "2026-08-21T13:48:01.085913188Z"
     description: The Formal Connector is a protocol-aware proxy that provides visibility
@@ -236,6 +256,16 @@ entries:
     - https://github.com/formalco/helm-charts/releases/download/connector-0.1.0/connector-0.1.0.tgz
     version: 0.1.0
   data-discovery-satellite:
+  - apiVersion: v2
+    created: "2026-10-01T12:47:03.990846212Z"
+    description: The Formal Data Discovery Satellite indexes the schemas of datastores
+      within your environment.
+    digest: a2d12ea11882369425f4bbb6e7da433685c1554922eb96cf53fad77df63a57b0
+    name: data-discovery-satellite
+    type: application
+    urls:
+    - https://github.com/formalco/helm-charts/releases/download/data-discovery-satellite-0.6.0/data-discovery-satellite-0.6.0.tgz
+    version: 0.6.0
   - apiVersion: v2
     created: "2026-10-01T09:33:52.993025692Z"
     description: The Formal Data Discovery Satellite indexes the schemas of datastores
@@ -445,6 +475,16 @@ entries:
     version: 0.1.0
   policy-data-loader-satellite:
   - apiVersion: v2
+    created: "2026-10-01T12:47:04.278475121Z"
+    description: The Formal Policy Data Loader Satellite executes customer-defined
+      code to load arbitrary external data into connector context.
+    digest: 7d2102494c2c97839d15d5e5121d1a25ef361ae10ba482ff129c94af2746cf57
+    name: policy-data-loader-satellite
+    type: application
+    urls:
+    - https://github.com/formalco/helm-charts/releases/download/policy-data-loader-satellite-0.5.0/policy-data-loader-satellite-0.5.0.tgz
+    version: 0.5.0
+  - apiVersion: v2
     created: "2026-10-01T09:33:53.164394329Z"
     description: The Formal Policy Data Loader Satellite executes customer-defined
       code to load arbitrary external data into connector context.
@@ -484,4 +524,4 @@ entries:
     urls:
     - https://github.com/formalco/helm-charts/releases/download/policy-data-loader-satellite-0.1.0/policy-data-loader-satellite-0.1.0.tgz
     version: 0.1.0
-generated: "2026-10-01T09:33:53.164473109Z"
+generated: "2026-10-01T12:47:04.278798595Z"
