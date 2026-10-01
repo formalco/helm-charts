@@ -2,6 +2,16 @@ apiVersion: v1
 entries:
   ai-satellite:
   - apiVersion: v2
+    created: "2026-10-01T09:33:52.821808511Z"
+    description: The Formal AI Satellite serves AI features and inference inside your
+      environment.
+    digest: 4e144ca0b538f4741d91dd1f00117483b41f11d8a2ae8923b4498bd89d302f70
+    name: ai-satellite
+    type: application
+    urls:
+    - https://github.com/formalco/helm-charts/releases/download/ai-satellite-0.13.0/ai-satellite-0.13.0.tgz
+    version: 0.13.0
+  - apiVersion: v2
     created: "2026-08-21T13:48:00.908762716Z"
     description: The Formal AI Satellite serves AI features and inference inside your
       environment.
@@ -227,6 +237,16 @@ entries:
     version: 0.1.0
   data-discovery-satellite:
   - apiVersion: v2
+    created: "2026-10-01T09:33:52.993025692Z"
+    description: The Formal Data Discovery Satellite indexes the schemas of datastores
+      within your environment.
+    digest: 41042664e5b1453dca20b67087d1ea0dfcd271aecd0e24f995ff081f190317a3
+    name: data-discovery-satellite
+    type: application
+    urls:
+    - https://github.com/formalco/helm-charts/releases/download/data-discovery-satellite-0.5.0/data-discovery-satellite-0.5.0.tgz
+    version: 0.5.0
+  - apiVersion: v2
     created: "2026-08-21T13:48:01.234342013Z"
     description: The Formal Data Discovery Satellite indexes the schemas of datastores
       within your environment.
@@ -425,6 +445,16 @@ entries:
     version: 0.1.0
   policy-data-loader-satellite:
   - apiVersion: v2
+    created: "2026-10-01T09:33:53.164394329Z"
+    description: The Formal Policy Data Loader Satellite executes customer-defined
+      code to load arbitrary external data into connector context.
+    digest: 61d2516f6d59642e5711a671045f811e4ab07b343d483ea5f3cef13140273b42
+    name: policy-data-loader-satellite
+    type: application
+    urls:
+    - https://github.com/formalco/helm-charts/releases/download/policy-data-loader-satellite-0.4.0/policy-data-loader-satellite-0.4.0.tgz
+    version: 0.4.0
+  - apiVersion: v2
     created: "2026-08-21T13:48:01.703089088Z"
     description: The Formal Policy Data Loader Satellite executes customer-defined
       code to load arbitrary external data into connector context.
@@ -454,4 +484,4 @@ entries:
     urls:
     - https://github.com/formalco/helm-charts/releases/download/policy-data-loader-satellite-0.1.0/policy-data-loader-satellite-0.1.0.tgz
     version: 0.1.0
-generated: "2026-09-30T15:19:18.663472381Z"
+generated: "2026-10-01T09:33:53.164473109Z"
