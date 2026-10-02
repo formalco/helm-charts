@@ -57,6 +57,10 @@ volumeMounts:
 service:
   type: LoadBalancer
 
+  # Local keeps the client source IP on passthrough load balancers instead
+  # of SNATing it to a node IP, so logs show the real client IP address.
+  externalTrafficPolicy: Local
+
   # Set the service annotations according to your Kubernetes provider
   # and network topoligy
   annotations: {}
@@ -66,6 +70,9 @@ service:
     # service.beta.kubernetes.io/aws-load-balancer-healthcheck-protocol: HTTP
     # service.beta.kubernetes.io/aws-load-balancer-healthcheck-path: "/health"
     # service.beta.kubernetes.io/aws-load-balancer-healthcheck-port: "8080"
+    # # NLBs with IP targets and Classic ELBs replace the client source IP.
+    # # The Connector reads the original one from the PROXY protocol header.
+    # service.beta.kubernetes.io/aws-load-balancer-proxy-protocol: "*"
 
   # Optional: restrict source IPs that can access the service
   loadBalancerSourceRanges: []
