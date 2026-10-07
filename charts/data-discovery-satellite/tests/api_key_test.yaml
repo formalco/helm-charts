@@ -1,0 +1,89 @@
+suite: API key
+templates:
+  - deployment.yaml
+  - secrets.yaml
+release:
+  name: formal
+tests:
+  - it: stores formalAPIKey in a chart Secret
+    template: secrets.yaml
+    set:
+      formalAPIKey: test-key
+    asserts:
+      - isKind:
+          of: Secret
+      - equal:
+          path: metadata.name
+          value: formal-data-discovery-satellite
+      - equal:
+          path: data.formal-api-key
+          value: dGVzdC1rZXk=
+
+  - it: reads formalAPIKey from the chart Secret
+    template: deployment.yaml
+    set:
+      formalAPIKey: test-key
+    asserts:
+      - contains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: FORMAL_CONTROL_PLANE_API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: formal-data-discovery-satellite
+                key: formal-api-key
+
+  - it: reads formalAPIKeySecret from the existing Secret
+    template: deployment.yaml
+    set:
+      formalAPIKeySecret:
+        name: data-discovery-satellite-api-key
+        key: api-key
+    asserts:
+      - contains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: FORMAL_CONTROL_PLANE_API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: data-discovery-satellite-api-key
+                key: api-key
+
+  - it: creates no Secret with formalAPIKeySecret
+    template: secrets.yaml
+    set:
+      formalAPIKeySecret:
+        name: data-discovery-satellite-api-key
+        key: api-key
+    asserts:
+      - hasDocuments:
+          count: 0
+
+  - it: rejects formalAPIKey with formalAPIKeySecret
+    template: deployment.yaml
+    set:
+      formalAPIKey: test-key
+      formalAPIKeySecret:
+        name: data-discovery-satellite-api-key
+        key: api-key
+    asserts:
+      - failedTemplate:
+          errorMessage: formalAPIKey and formalAPIKeySecret are mutually exclusive
+
+  - it: requires formalAPIKeySecret.key
+    template: deployment.yaml
+    set:
+      formalAPIKeySecret:
+        name: data-discovery-satellite-api-key
+    asserts:
+      - failedTemplate:
+          errorMessage: formalAPIKeySecret.key is required with formalAPIKeySecret.name
+
+  - it: requires formalAPIKeySecret.name
+    template: deployment.yaml
+    set:
+      formalAPIKeySecret:
+        key: api-key
+    asserts:
+      - failedTemplate:
+          errorMessage: formalAPIKeySecret.name is required with formalAPIKeySecret.key

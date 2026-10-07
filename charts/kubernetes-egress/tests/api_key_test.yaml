@@ -1,0 +1,35 @@
+suite: API key
+templates:
+  - mutatingadmissionpolicy.yaml
+tests:
+  - it: reads the default Secret
+    asserts:
+      - matchRegex:
+          path: spec.mutations[1].jsonPatch.expression
+          pattern: 'name: "formal-kubernetes-egress",\s+key: "formal-api-key"'
+
+  - it: reads formalAPIKeySecret
+    set:
+      formalAPIKeySecret:
+        name: agent-api-key
+        key: api-key
+    asserts:
+      - matchRegex:
+          path: spec.mutations[1].jsonPatch.expression
+          pattern: 'name: "agent-api-key",\s+key: "api-key"'
+
+  - it: requires formalAPIKeySecret.name
+    set:
+      formalAPIKeySecret:
+        name: ""
+    asserts:
+      - failedTemplate:
+          errorMessage: formalAPIKeySecret.name is required
+
+  - it: requires formalAPIKeySecret.key
+    set:
+      formalAPIKeySecret:
+        key: ""
+    asserts:
+      - failedTemplate:
+          errorMessage: formalAPIKeySecret.key is required

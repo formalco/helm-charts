@@ -1,0 +1,5 @@
+apiVersion: v2
+name: formal-common
+description: Shared templates for the Formal Helm charts. Not installable on its own.
+type: library
+version: 0.1.0

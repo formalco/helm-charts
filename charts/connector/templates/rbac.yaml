@@ -2,9 +2,9 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: {{ include "connector.fullname" . }}
+  name: {{ include "formal-common.fullname" . }}
   labels:
-    {{- include "connector.labels" . | nindent 4 }}
+    {{- include "formal-common.labels" . | nindent 4 }}
 rules:
 - apiGroups: [""]
   resources: ["pods"]
@@ -13,15 +13,15 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: {{ include "connector.fullname" . }}
+  name: {{ include "formal-common.fullname" . }}
   labels:
-    {{- include "connector.labels" . | nindent 4 }}
+    {{- include "formal-common.labels" . | nindent 4 }}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: {{ include "connector.fullname" . }}
+  name: {{ include "formal-common.fullname" . }}
 subjects:
 - kind: ServiceAccount
-  name: {{ include "connector.serviceAccountName" . }}
+  name: {{ include "formal-common.serviceAccountName" . }}
   namespace: {{ .Release.Namespace }}
 {{- end }}

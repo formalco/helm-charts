@@ -1,0 +1,140 @@
+suite: API key
+templates:
+  - deployment.yaml
+  - secrets.yaml
+  - configmap.yaml
+tests:
+  - it: sets no API key by default
+    template: deployment.yaml
+    asserts:
+      - notContains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: FORMAL_API_KEY
+          any: true
+
+  - it: creates no Secret by default
+    template: secrets.yaml
+    asserts:
+      - hasDocuments:
+          count: 0
+
+  - it: stores formalAPIKey in a chart Secret
+    template: secrets.yaml
+    set:
+      formalAPIKey: test-key
+    asserts:
+      - isKind:
+          of: Secret
+      - equal:
+          path: metadata.name
+          value: formal-kubernetes-operator
+      - equal:
+          path: data.formal-api-key
+          value: dGVzdC1rZXk=
+
+  - it: reads formalAPIKey from the chart Secret
+    template: deployment.yaml
+    set:
+      formalAPIKey: test-key
+    asserts:
+      - contains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: FORMAL_API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: formal-kubernetes-operator
+                key: formal-api-key
+
+  - it: reads formalAPIKeySecret from the existing Secret
+    template: deployment.yaml
+    set:
+      formalAPIKeySecret:
+        name: operator-api-key
+        key: api-key
+    asserts:
+      - contains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: FORMAL_API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: operator-api-key
+                key: api-key
+
+  - it: creates no Secret with formalAPIKeySecret
+    template: secrets.yaml
+    set:
+      formalAPIKeySecret:
+        name: operator-api-key
+        key: api-key
+    asserts:
+      - hasDocuments:
+          count: 0
+
+  - it: rejects formalAPIKey with formalAPIKeySecret
+    template: deployment.yaml
+    set:
+      formalAPIKey: test-key
+      formalAPIKeySecret:
+        name: operator-api-key
+        key: api-key
+    asserts:
+      - failedTemplate:
+          errorMessage: formalAPIKey and formalAPIKeySecret are mutually exclusive
+
+  - it: requires formalAPIKeySecret.key
+    template: deployment.yaml
+    set:
+      formalAPIKeySecret:
+        name: operator-api-key
+    asserts:
+      - failedTemplate:
+          errorMessage: formalAPIKeySecret.key is required with formalAPIKeySecret.name
+
+  - it: requires formalAPIKeySecret.name
+    template: deployment.yaml
+    set:
+      formalAPIKeySecret:
+        key: api-key
+    asserts:
+      - failedTemplate:
+          errorMessage: formalAPIKeySecret.name is required with formalAPIKeySecret.key
+
+  - it: sets no API key with oidc
+    template: deployment.yaml
+    set:
+      oidc:
+        integration_id: integrationoidc_abc
+        aws: {}
+    asserts:
+      - notContains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: FORMAL_API_KEY
+          any: true
+
+  - it: rejects formalAPIKey with oidc
+    template: deployment.yaml
+    set:
+      formalAPIKey: test-key
+      oidc:
+        integration_id: integrationoidc_abc
+        aws: {}
+    asserts:
+      - failedTemplate:
+          errorMessage: oidc is mutually exclusive with formalAPIKey and formalAPIKeySecret
+
+  - it: rejects formalAPIKeySecret with oidc
+    template: deployment.yaml
+    set:
+      formalAPIKeySecret:
+        name: operator-api-key
+        key: api-key
+      oidc:
+        integration_id: integrationoidc_abc
+        aws: {}
+    asserts:
+      - failedTemplate:
+          errorMessage: oidc is mutually exclusive with formalAPIKey and formalAPIKeySecret

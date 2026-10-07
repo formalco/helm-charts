@@ -13,8 +13,8 @@ Object.spec.initContainers{
       name: "FORMAL_API_KEY",
       valueFrom: Object.spec.initContainers.env.valueFrom{
         secretKeyRef: Object.spec.initContainers.env.valueFrom.secretKeyRef{
-          name: "formal-kubernetes-egress",
-          key: "formal-api-key"
+          name: {{ required "formalAPIKeySecret.name is required" .Values.formalAPIKeySecret.name | quote }},
+          key: {{ required "formalAPIKeySecret.key is required" .Values.formalAPIKeySecret.key | quote }}
         }
       }
     }

@@ -1,10 +1,18 @@
 nameOverride: ""
 fullnameOverride: ""
 
-# API key for the Formal Control Plane. Mutually exclusive with oidc.
+# API key for the Formal Control Plane. The chart stores it in a Secret.
+# Mutually exclusive with formalAPIKeySecret and oidc.
 formalAPIKey: ""
 
-# OIDC written to the ConfigMap. Mutually exclusive with formalAPIKey.
+# Existing Secret that holds the API key. The chart does not create it.
+# Set both name and key. Mutually exclusive with formalAPIKey and oidc.
+formalAPIKeySecret:
+  name: ""
+  key: ""
+
+# OIDC written to the ConfigMap. Mutually exclusive with formalAPIKey and
+# formalAPIKeySecret.
 # Set integration_id and exactly one source object (aws: {} or azure: {}).
 oidc:
   integration_id: ""

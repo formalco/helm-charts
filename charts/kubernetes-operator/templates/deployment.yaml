@@ -3,18 +3,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "kubernetes-operator.fullname" . }}
+  name: {{ include "formal-common.fullname" . }}
   labels:
-    {{- include "kubernetes-operator.labels" . | nindent 4 }}
+    {{- include "formal-common.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      {{- include "kubernetes-operator.selectorLabels" . | nindent 6 }}
+      {{- include "formal-common.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        {{- include "kubernetes-operator.selectorLabels" . | nindent 8 }}
+        {{- include "formal-common.selectorLabels" . | nindent 8 }}
         {{- if has "azure" $oidcSources }}
         azure.workload.identity/use: "true"
         {{- end }}
@@ -26,7 +26,7 @@ spec:
     spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
-      serviceAccountName: {{ include "kubernetes-operator.fullname" . }}
+      serviceAccountName: {{ include "formal-common.fullname" . }}
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
@@ -43,12 +43,12 @@ spec:
           env:
             - name: FORMAL_CONFIG
               value: /etc/formal/config.yaml
-            {{- if .Values.formalAPIKey }}
+            {{- if include "formal-common.hasAPIKey" . }}
             - name: FORMAL_API_KEY
               valueFrom:
                 secretKeyRef:
-                  name: {{ include "kubernetes-operator.fullname" . }}
-                  key: formal-api-key
+                  name: {{ include "formal-common.apiKeySecretName" . | quote }}
+                  key: {{ include "formal-common.apiKeySecretKey" . | quote }}
             {{- end }}
           volumeMounts:
             - name: config
@@ -59,7 +59,7 @@ spec:
       volumes:
         - name: config
           configMap:
-            name: {{ include "kubernetes-operator.fullname" . }}
+            name: {{ include "formal-common.fullname" . }}
       {{- if .Values.pullWithCredentials }}
       imagePullSecrets:
         - name: formal-ecr-secret

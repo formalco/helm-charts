@@ -21,6 +21,11 @@ This repository contains Helm Charts to deploy Formal on your Kubernetes cluster
 | [ecr-cred](charts/ecr-cred)   | ECR credentials job. Required when pulling Formal images from ECR outside AWS. Requires `pullWithCredentials=true` in workload chart values. |
 | [azure-gar-cred](charts/azure-gar-cred) | GAR credentials job for AKS using Azure Workload Identity and GCP WIF. Requires `pullWithCredentials=true` in workload chart values. |
 
+[formal-common](charts/formal-common) is a library chart with templates that
+other charts share. You cannot install it. Published charts already contain it.
+To install a chart from a checkout, run `helm dependency build charts/<chart>`
+first.
+
 ## Image Pull Credentials
 
 On AKS, use GAR images with [azure-gar-cred](charts/azure-gar-cred). Install the

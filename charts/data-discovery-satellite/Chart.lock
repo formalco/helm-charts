@@ -1,0 +1,6 @@
+dependencies:
+- name: formal-common
+  repository: file://../formal-common
+  version: 0.1.0
+digest: sha256:8c1d6fd29c3f9e13d7be254f2746acad0bb6ad9d54814317a879dc381fb72857
+generated: "2026-10-06T09:29:49.017446-04:00"

@@ -14,3 +14,9 @@ sidecar:
 
 # Set true when using the ecr-cred or azure-gar-cred chart.
 pullWithCredentials: false
+
+# Secret that holds the API key, in each namespace with labeled Pods. The
+# chart does not create it. Set both name and key.
+formalAPIKeySecret:
+  name: formal-kubernetes-egress
+  key: formal-api-key

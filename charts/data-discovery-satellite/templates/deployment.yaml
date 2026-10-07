@@ -1,18 +1,19 @@
+{{- include "formal-common.validateAPIKey" . }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "data-discovery-satellite.fullname" . }}
+  name: {{ include "formal-common.fullname" . }}
   labels:
-    {{- include "data-discovery-satellite.labels" . | nindent 4 }}
+    {{- include "formal-common.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      {{- include "data-discovery-satellite.selectorLabels" . | nindent 6 }}
+      {{- include "formal-common.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        {{- include "data-discovery-satellite.selectorLabels" . | nindent 8 }}
+        {{- include "formal-common.selectorLabels" . | nindent 8 }}
         {{- with .Values.podLabels }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
@@ -23,7 +24,7 @@ spec:
     spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
-      serviceAccountName: {{ include "data-discovery-satellite.serviceAccountName" . }}
+      serviceAccountName: {{ include "formal-common.serviceAccountName" . }}
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
@@ -41,22 +42,10 @@ spec:
             - name: FORMAL_CONTROL_PLANE_API_KEY
               valueFrom:
                 secretKeyRef:
-                  name: {{ include "data-discovery-satellite.fullname" . }}
-                  key: formal-api-key
-            {{- if kindIs "slice" .Values.env }}
-            {{- with .Values.env }}
-            {{- toYaml . | nindent 12 }}
-            {{- end }}
-            {{- else }}
-            {{- range $name, $value := .Values.env }}
-            {{- if kindIs "map" $value }}
-            - name: {{ $name }}
-              {{- toYaml $value | nindent 14 }}
-            {{- else if not (kindIs "invalid" $value) }}
-            - name: {{ $name }}
-              value: {{ $value | toString | quote }}
-            {{- end }}
-            {{- end }}
+                  name: {{ include "formal-common.apiKeySecretName" . | quote }}
+                  key: {{ include "formal-common.apiKeySecretKey" . | quote }}
+            {{- with include "formal-common.env" . | trim }}
+            {{- . | nindent 12 }}
             {{- end }}
           {{- with .Values.envFrom }}
           envFrom:

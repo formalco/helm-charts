@@ -4,6 +4,12 @@ fullnameOverride: ""
 # API key for the AI Satellite configured in Formal Control Plane
 formalAPIKey: ""
 
+# Existing Secret that holds the API key. The chart does not create it.
+# Set both name and key. Mutually exclusive with formalAPIKey.
+formalAPIKeySecret:
+  name: ""
+  key: ""
+
 # Set to true when using the ecr-cred or azure-gar-cred Helm chart
 # to manage the Formal image pull secret.
 pullWithCredentials: false

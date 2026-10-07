@@ -1,4 +1,1 @@
-{{- range .Values.extraManifests }}
----
-{{ toYaml . }}
-{{- end }}
+{{- include "formal-common.extraManifests" . }}

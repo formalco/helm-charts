@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ include "kubernetes-operator.fullname" . }}
+  name: {{ include "formal-common.fullname" . }}
   labels:
-    {{- include "kubernetes-operator.labels" . | nindent 4 }}
+    {{- include "formal-common.labels" . | nindent 4 }}
 data:
   config.yaml: |
     metricsAddr: ":{{ .Values.metricsPort }}"

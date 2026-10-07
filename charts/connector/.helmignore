@@ -1,0 +1,2 @@
+# Chart tests are for this repository, not for the packaged chart.
+tests/
