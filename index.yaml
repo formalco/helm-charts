@@ -2,6 +2,20 @@ apiVersion: v1
 entries:
   ai-satellite:
   - apiVersion: v2
+    created: "2026-10-07T14:58:55.731088254Z"
+    dependencies:
+    - name: formal-common
+      repository: file://../formal-common
+      version: 0.1.0
+    description: The Formal AI Satellite serves AI features and inference inside your
+      environment.
+    digest: c6a86e1889350f118b199f54ebce711441b4aa569feaae336c1e1e89f23d3220
+    name: ai-satellite
+    type: application
+    urls:
+    - https://github.com/formalco/helm-charts/releases/download/ai-satellite-0.15.0/ai-satellite-0.15.0.tgz
+    version: 0.15.0
+  - apiVersion: v2
     created: "2026-10-01T12:47:03.347407475Z"
     description: The Formal AI Satellite serves AI features and inference inside your
       environment.
@@ -267,6 +281,20 @@ entries:
     version: 0.1.0
   data-discovery-satellite:
   - apiVersion: v2
+    created: "2026-10-07T14:58:56.113372249Z"
+    dependencies:
+    - name: formal-common
+      repository: file://../formal-common
+      version: 0.1.0
+    description: The Formal Data Discovery Satellite indexes the schemas of datastores
+      within your environment.
+    digest: f8c8626426cc82190d05ae5d400ef69e8e78f8e7ee4cfbc4bd146fc9fea3aa23
+    name: data-discovery-satellite
+    type: application
+    urls:
+    - https://github.com/formalco/helm-charts/releases/download/data-discovery-satellite-0.7.0/data-discovery-satellite-0.7.0.tgz
+    version: 0.7.0
+  - apiVersion: v2
     created: "2026-10-01T12:47:03.990846212Z"
     description: The Formal Data Discovery Satellite indexes the schemas of datastores
       within your environment.
@@ -367,6 +395,17 @@ entries:
     urls:
     - https://github.com/formalco/helm-charts/releases/download/ecr-cred-0.1.1/ecr-cred-0.1.1.tgz
     version: 0.1.1
+  formal-common:
+  - apiVersion: v2
+    created: "2026-10-07T14:58:56.33701644Z"
+    description: Shared templates for the Formal Helm charts. Not installable on its
+      own.
+    digest: 4a6219de1484fa0fc1d48088328302de5703f563392a6b9a65ff01b8e4b70263
+    name: formal-common
+    type: library
+    urls:
+    - https://github.com/formalco/helm-charts/releases/download/formal-common-0.1.0/formal-common-0.1.0.tgz
+    version: 0.1.0
   formal-connector:
   - apiVersion: v2
     appVersion: 1.0.0
@@ -381,6 +420,16 @@ entries:
     version: 0.1.0
   kubernetes-egress:
   - apiVersion: v2
+    created: "2026-10-07T14:58:56.554879258Z"
+    description: Inject Formal Endpoint as a sidecar. Requires Kubernetes 1.36+.
+    digest: a02051909b28e032c94d859947f2040f2c2f08c0bcb87699113c1914bcf449e4
+    kubeVersion: '>=1.36.0-0'
+    name: kubernetes-egress
+    type: application
+    urls:
+    - https://github.com/formalco/helm-charts/releases/download/kubernetes-egress-0.2.0/kubernetes-egress-0.2.0.tgz
+    version: 0.2.0
+  - apiVersion: v2
     created: "2026-09-04T21:13:09.090301899Z"
     description: Inject Formal Kubernetes Egress as a sidecar using a mutating admission
       policy.
@@ -392,6 +441,21 @@ entries:
     - https://github.com/formalco/helm-charts/releases/download/kubernetes-egress-0.1.0/kubernetes-egress-0.1.0.tgz
     version: 0.1.0
   kubernetes-operator:
+  - apiVersion: v2
+    appVersion: 0.7.0
+    created: "2026-10-07T14:58:56.781713746Z"
+    dependencies:
+    - name: formal-common
+      repository: file://../formal-common
+      version: 0.1.0
+    description: The Formal Kubernetes Operator automatically registers in-cluster
+      services as Formal resources with fully working connection paths.
+    digest: ce38c58dfa08568e60220f8fe6e86fb29058a5810480b8f7de00084af39c50c7
+    name: kubernetes-operator
+    type: application
+    urls:
+    - https://github.com/formalco/helm-charts/releases/download/kubernetes-operator-0.9.0/kubernetes-operator-0.9.0.tgz
+    version: 0.9.0
   - apiVersion: v2
     appVersion: 0.7.0
     created: "2026-09-30T15:19:18.663382372Z"
@@ -485,6 +549,20 @@ entries:
     version: 0.1.0
   policy-data-loader-satellite:
   - apiVersion: v2
+    created: "2026-10-07T14:58:56.970724971Z"
+    dependencies:
+    - name: formal-common
+      repository: file://../formal-common
+      version: 0.1.0
+    description: The Formal Policy Data Loader Satellite executes customer-defined
+      code to load arbitrary external data into connector context.
+    digest: 1182cc318dad6050527dd5f5e68ef66d9007009479fe43d25a20ad50adbaec87
+    name: policy-data-loader-satellite
+    type: application
+    urls:
+    - https://github.com/formalco/helm-charts/releases/download/policy-data-loader-satellite-0.6.0/policy-data-loader-satellite-0.6.0.tgz
+    version: 0.6.0
+  - apiVersion: v2
     created: "2026-10-01T12:47:04.278475121Z"
     description: The Formal Policy Data Loader Satellite executes customer-defined
       code to load arbitrary external data into connector context.
@@ -534,4 +612,4 @@ entries:
     urls:
     - https://github.com/formalco/helm-charts/releases/download/policy-data-loader-satellite-0.1.0/policy-data-loader-satellite-0.1.0.tgz
     version: 0.1.0
-generated: "2026-10-02T23:57:45.12926537Z"
+generated: "2026-10-07T14:58:56.970819312Z"
