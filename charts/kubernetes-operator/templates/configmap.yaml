@@ -15,6 +15,11 @@ data:
     oidc:
       integration_id: {{ .Values.oidc.integration_id | quote }}
       {{- range $sources }}
+      {{- if eq . "serviceAccountToken" }}
+      file:
+        path: {{ include "kubernetes-operator.oidcTokenPath" $ | quote }}
+      {{- else }}
       {{ . }}: {}
+      {{- end }}
       {{- end }}
     {{- end }}

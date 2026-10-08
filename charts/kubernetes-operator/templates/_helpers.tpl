@@ -11,6 +11,14 @@ Comma-separated OIDC source keys (every oidc.* map except integration_id).
 {{- join "," $sources -}}
 {{- end }}
 
+{{- define "kubernetes-operator.oidcTokenDir" -}}
+/var/run/secrets/formal
+{{- end }}
+
+{{- define "kubernetes-operator.oidcTokenPath" -}}
+{{ include "kubernetes-operator.oidcTokenDir" . }}/token
+{{- end }}
+
 {{/*
 Validate Formal authentication: an API key or exactly one OIDC source.
 */}}

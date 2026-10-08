@@ -13,7 +13,10 @@ formalAPIKeySecret:
 
 # OIDC written to the ConfigMap. Mutually exclusive with formalAPIKey and
 # formalAPIKeySecret.
-# Set integration_id and exactly one source object (aws: {} or azure: {}).
+# Set integration_id and exactly one source object (aws: {}, azure: {}, or
+# serviceAccountToken: {}). serviceAccountToken: {} projects the pod's
+# ServiceAccount token with audience oidc.formal.ai/<integration_id>, for
+# issuers such as Amazon EKS.
 oidc:
   integration_id: ""
 
