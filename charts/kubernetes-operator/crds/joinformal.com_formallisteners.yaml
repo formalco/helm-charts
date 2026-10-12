@@ -39,8 +39,14 @@ spec:
             properties:
               connectorId:
                 type: string
+                x-kubernetes-validations:
+                - message: connectorId is immutable
+                  rule: self == oldSelf
               name:
                 type: string
+                x-kubernetes-validations:
+                - message: name is immutable
+                  rule: self == oldSelf
               port:
                 format: int32
                 type: integer
@@ -56,6 +62,11 @@ spec:
                   required:
                   - type
                   type: object
+                  x-kubernetes-validations:
+                  - message: technology must be set if and only if type is technology
+                    rule: has(self.technology) == (self.type == 'technology')
+                  - message: resourceRef must be set if and only if type is resource
+                    rule: has(self.resourceRef) == (self.type == 'resource')
                 type: array
             required:
             - connectorId

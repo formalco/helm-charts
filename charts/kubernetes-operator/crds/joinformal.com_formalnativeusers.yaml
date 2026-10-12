@@ -42,6 +42,9 @@ spec:
                   key:
                     type: string
                   location:
+                    enum:
+                    - header
+                    - query_parameter
                     type: string
                   secretRef:
                     properties:
@@ -99,6 +102,10 @@ spec:
               iam:
                 properties:
                   cloudProvider:
+                    enum:
+                    - aws
+                    - gcp
+                    - azure
                     type: string
                   role:
                     type: string
@@ -131,6 +138,9 @@ spec:
                 type: object
               resourceRef:
                 type: string
+                x-kubernetes-validations:
+                - message: resourceRef is immutable
+                  rule: self == oldSelf
               secretRef:
                 properties:
                   keys:
@@ -181,12 +191,32 @@ spec:
                 type: object
               type:
                 type: string
+                x-kubernetes-validations:
+                - message: type is immutable
+                  rule: self == oldSelf
               useAsDefault:
                 type: boolean
             required:
             - resourceRef
             - type
             type: object
+            x-kubernetes-validations:
+            - message: secretRef must be set if and only if type is basic
+              rule: has(self.secretRef) == (self.type == 'basic')
+            - message: iam must be set if and only if type is iam
+              rule: has(self.iam) == (self.type == 'iam')
+            - message: kubernetes must be set if and only if type is kubernetes
+              rule: has(self.kubernetes) == (self.type == 'kubernetes')
+            - message: sshKey must be set if and only if type is ssh_key
+              rule: has(self.sshKey) == (self.type == 'ssh_key')
+            - message: snowflakeKey must be set if and only if type is snowflake_key
+              rule: has(self.snowflakeKey) == (self.type == 'snowflake_key')
+            - message: httpBasic must be set if and only if type is http_basic
+              rule: has(self.httpBasic) == (self.type == 'http_basic')
+            - message: httpBearer must be set if and only if type is http_bearer
+              rule: has(self.httpBearer) == (self.type == 'http_bearer')
+            - message: httpApiKey must be set if and only if type is http_api_key
+              rule: has(self.httpApiKey) == (self.type == 'http_api_key')
           status:
             properties:
               conditions:
