@@ -2,8 +2,8 @@ apiVersion: v2
 name: kubernetes-operator
 description: The Formal Kubernetes Operator automatically registers in-cluster services as Formal resources with fully working connection paths.
 type: application
-version: 0.10.1
-appVersion: 0.8.1
+version: 0.10.2
+appVersion: 0.8.2
 dependencies:
   - name: formal-common
     version: 0.1.0

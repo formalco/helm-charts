@@ -37,6 +37,10 @@ spec:
             type: object
           spec:
             properties:
+              aliases:
+                items:
+                  type: string
+                type: array
               hostname:
                 type: string
               port:
@@ -44,6 +48,10 @@ spec:
                 type: integer
               spaceId:
                 type: string
+              tags:
+                additionalProperties:
+                  type: string
+                type: object
               technology:
                 type: string
                 x-kubernetes-validations:
