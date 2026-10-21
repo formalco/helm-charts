@@ -51,6 +51,17 @@ tests:
             name: formal-oidc-token
           any: true
 
+  - it: writes the gcp source
+    template: configmap.yaml
+    set:
+      oidc:
+        integration_id: integrationoidc_abc
+        gcp: {}
+    asserts:
+      - matchRegex:
+          path: data["config.yaml"]
+          pattern: '(?m)^  gcp: \{\}$'
+
   - it: requires integration_id with serviceAccountToken
     template: deployment.yaml
     set:
