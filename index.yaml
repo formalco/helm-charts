@@ -442,6 +442,21 @@ entries:
     version: 0.1.0
   kubernetes-operator:
   - apiVersion: v2
+    appVersion: 0.9.1
+    created: "2026-10-21T00:43:16.302478404Z"
+    dependencies:
+    - name: formal-common
+      repository: file://../formal-common
+      version: 0.1.0
+    description: The Formal Kubernetes Operator automatically registers in-cluster
+      services as Formal resources with fully working connection paths.
+    digest: d432ae8d758f2562ad7bba562e8f541c585779c5b0ce9b679eeffa2a2f9b3417
+    name: kubernetes-operator
+    type: application
+    urls:
+    - https://github.com/formalco/helm-charts/releases/download/kubernetes-operator-0.10.4/kubernetes-operator-0.10.4.tgz
+    version: 0.10.4
+  - apiVersion: v2
     appVersion: 0.9.0
     created: "2026-10-15T22:23:16.305902871Z"
     dependencies:
@@ -672,4 +687,4 @@ entries:
     urls:
     - https://github.com/formalco/helm-charts/releases/download/policy-data-loader-satellite-0.1.0/policy-data-loader-satellite-0.1.0.tgz
     version: 0.1.0
-generated: "2026-10-15T22:23:16.30602348Z"
+generated: "2026-10-21T00:43:16.302736016Z"
