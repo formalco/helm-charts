@@ -13,6 +13,10 @@ rules:
     - formallisteners/status
     - formalnativeusers
     - formalnativeusers/status
+    - formalnativeuserv3s
+    - formalnativeuserv3s/status
+    - formalnativeuserselections
+    - formalnativeuserselections/status
     - formalpolicies
     - formalpolicies/status
     - formalconnectorhostnames

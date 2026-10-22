@@ -1,0 +1,469 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.20.1
+  name: formalnativeuserv3s.joinformal.com
+spec:
+  group: joinformal.com
+  names:
+    kind: FormalNativeUserV3
+    listKind: FormalNativeUserV3List
+    plural: formalnativeuserv3s
+    singular: formalnativeuserv3
+  scope: Namespaced
+  versions:
+  - name: v1
+    schema:
+      openAPIV3Schema:
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            properties:
+              credentials:
+                properties:
+                  awsIam:
+                    properties:
+                      username:
+                        type: string
+                    required:
+                    - username
+                    type: object
+                  awsIamRole:
+                    properties:
+                      role:
+                        type: string
+                      username:
+                        type: string
+                    required:
+                    - role
+                    - username
+                    type: object
+                  azureIam:
+                    properties:
+                      username:
+                        type: string
+                    required:
+                    - username
+                    type: object
+                  basic:
+                    properties:
+                      password:
+                        properties:
+                          environmentVariable:
+                            type: string
+                          secretRef:
+                            properties:
+                              key:
+                                type: string
+                              name:
+                                type: string
+                            required:
+                            - key
+                            - name
+                            type: object
+                        type: object
+                        x-kubernetes-validations:
+                        - message: exactly one of secretRef or environmentVariable
+                            must be configured
+                          rule: has(self.secretRef) != has(self.environmentVariable)
+                      username:
+                        type: string
+                    required:
+                    - password
+                    - username
+                    type: object
+                  gcpIam:
+                    properties:
+                      username:
+                        type: string
+                    required:
+                    - username
+                    type: object
+                  hook:
+                    properties:
+                      allowlistedEnvVariables:
+                        items:
+                          type: string
+                        type: array
+                      allowlistedNetworkHosts:
+                        items:
+                          type: string
+                        type: array
+                      code:
+                        type: string
+                      outputType:
+                        enum:
+                        - unauthenticated
+                        - basic
+                        - aws_iam
+                        - aws_iam_role
+                        - gcp_iam
+                        - azure_iam
+                        - kubernetes_path
+                        - kubernetes_inline
+                        - ssh_key
+                        - snowflake_key
+                        - http_basic
+                        - http_bearer
+                        - http_api_key_header
+                        - http_api_key_query
+                        type: string
+                    required:
+                    - code
+                    - outputType
+                    type: object
+                  httpApiKeyHeader:
+                    properties:
+                      key:
+                        type: string
+                      value:
+                        properties:
+                          environmentVariable:
+                            type: string
+                          secretRef:
+                            properties:
+                              key:
+                                type: string
+                              name:
+                                type: string
+                            required:
+                            - key
+                            - name
+                            type: object
+                        type: object
+                        x-kubernetes-validations:
+                        - message: exactly one of secretRef or environmentVariable
+                            must be configured
+                          rule: has(self.secretRef) != has(self.environmentVariable)
+                    required:
+                    - key
+                    - value
+                    type: object
+                  httpApiKeyQuery:
+                    properties:
+                      key:
+                        type: string
+                      value:
+                        properties:
+                          environmentVariable:
+                            type: string
+                          secretRef:
+                            properties:
+                              key:
+                                type: string
+                              name:
+                                type: string
+                            required:
+                            - key
+                            - name
+                            type: object
+                        type: object
+                        x-kubernetes-validations:
+                        - message: exactly one of secretRef or environmentVariable
+                            must be configured
+                          rule: has(self.secretRef) != has(self.environmentVariable)
+                    required:
+                    - key
+                    - value
+                    type: object
+                  httpBasic:
+                    properties:
+                      header:
+                        type: string
+                      password:
+                        properties:
+                          environmentVariable:
+                            type: string
+                          secretRef:
+                            properties:
+                              key:
+                                type: string
+                              name:
+                                type: string
+                            required:
+                            - key
+                            - name
+                            type: object
+                        type: object
+                        x-kubernetes-validations:
+                        - message: exactly one of secretRef or environmentVariable
+                            must be configured
+                          rule: has(self.secretRef) != has(self.environmentVariable)
+                      username:
+                        type: string
+                    required:
+                    - header
+                    - password
+                    - username
+                    type: object
+                  httpBearer:
+                    properties:
+                      header:
+                        type: string
+                      token:
+                        properties:
+                          environmentVariable:
+                            type: string
+                          secretRef:
+                            properties:
+                              key:
+                                type: string
+                              name:
+                                type: string
+                            required:
+                            - key
+                            - name
+                            type: object
+                        type: object
+                        x-kubernetes-validations:
+                        - message: exactly one of secretRef or environmentVariable
+                            must be configured
+                          rule: has(self.secretRef) != has(self.environmentVariable)
+                    required:
+                    - header
+                    - token
+                    type: object
+                  kubernetesInline:
+                    properties:
+                      kubeconfig:
+                        properties:
+                          environmentVariable:
+                            type: string
+                          secretRef:
+                            properties:
+                              key:
+                                type: string
+                              name:
+                                type: string
+                            required:
+                            - key
+                            - name
+                            type: object
+                        type: object
+                        x-kubernetes-validations:
+                        - message: exactly one of secretRef or environmentVariable
+                            must be configured
+                          rule: has(self.secretRef) != has(self.environmentVariable)
+                    required:
+                    - kubeconfig
+                    type: object
+                  kubernetesPath:
+                    properties:
+                      kubeconfigPath:
+                        properties:
+                          environmentVariable:
+                            type: string
+                          secretRef:
+                            properties:
+                              key:
+                                type: string
+                              name:
+                                type: string
+                            required:
+                            - key
+                            - name
+                            type: object
+                        type: object
+                        x-kubernetes-validations:
+                        - message: exactly one of secretRef or environmentVariable
+                            must be configured
+                          rule: has(self.secretRef) != has(self.environmentVariable)
+                    required:
+                    - kubeconfigPath
+                    type: object
+                  snowflakeKey:
+                    properties:
+                      key:
+                        properties:
+                          environmentVariable:
+                            type: string
+                          secretRef:
+                            properties:
+                              key:
+                                type: string
+                              name:
+                                type: string
+                            required:
+                            - key
+                            - name
+                            type: object
+                        type: object
+                        x-kubernetes-validations:
+                        - message: exactly one of secretRef or environmentVariable
+                            must be configured
+                          rule: has(self.secretRef) != has(self.environmentVariable)
+                      username:
+                        type: string
+                    required:
+                    - key
+                    - username
+                    type: object
+                  sshKey:
+                    properties:
+                      certificate:
+                        properties:
+                          environmentVariable:
+                            type: string
+                          secretRef:
+                            properties:
+                              key:
+                                type: string
+                              name:
+                                type: string
+                            required:
+                            - key
+                            - name
+                            type: object
+                        type: object
+                        x-kubernetes-validations:
+                        - message: exactly one of secretRef or environmentVariable
+                            must be configured
+                          rule: has(self.secretRef) != has(self.environmentVariable)
+                      key:
+                        properties:
+                          environmentVariable:
+                            type: string
+                          secretRef:
+                            properties:
+                              key:
+                                type: string
+                              name:
+                                type: string
+                            required:
+                            - key
+                            - name
+                            type: object
+                        type: object
+                        x-kubernetes-validations:
+                        - message: exactly one of secretRef or environmentVariable
+                            must be configured
+                          rule: has(self.secretRef) != has(self.environmentVariable)
+                      username:
+                        type: string
+                    required:
+                    - key
+                    - username
+                    type: object
+                  unauthenticated:
+                    type: object
+                type: object
+                x-kubernetes-validations:
+                - message: exactly one credential type must be configured
+                  rule: '(has(self.basic) ? 1 : 0) + (has(self.awsIam) ? 1 : 0) +
+                    (has(self.awsIamRole) ? 1 : 0) + (has(self.gcpIam) ? 1 : 0) +
+                    (has(self.azureIam) ? 1 : 0) + (has(self.kubernetesPath) ? 1 :
+                    0) + (has(self.kubernetesInline) ? 1 : 0) + (has(self.sshKey)
+                    ? 1 : 0) + (has(self.snowflakeKey) ? 1 : 0) + (has(self.httpBasic)
+                    ? 1 : 0) + (has(self.httpBearer) ? 1 : 0) + (has(self.httpApiKeyHeader)
+                    ? 1 : 0) + (has(self.httpApiKeyQuery) ? 1 : 0) + (has(self.hook)
+                    ? 1 : 0) + (has(self.unauthenticated) ? 1 : 0) == 1'
+                - message: credential type is immutable
+                  rule: has(self.basic) == has(oldSelf.basic) && has(self.awsIam)
+                    == has(oldSelf.awsIam) && has(self.awsIamRole) == has(oldSelf.awsIamRole)
+                    && has(self.gcpIam) == has(oldSelf.gcpIam) && has(self.azureIam)
+                    == has(oldSelf.azureIam) && has(self.kubernetesPath) == has(oldSelf.kubernetesPath)
+                    && has(self.kubernetesInline) == has(oldSelf.kubernetesInline)
+                    && has(self.sshKey) == has(oldSelf.sshKey) && has(self.snowflakeKey)
+                    == has(oldSelf.snowflakeKey) && has(self.httpBasic) == has(oldSelf.httpBasic)
+                    && has(self.httpBearer) == has(oldSelf.httpBearer) && has(self.httpApiKeyHeader)
+                    == has(oldSelf.httpApiKeyHeader) && has(self.httpApiKeyQuery)
+                    == has(oldSelf.httpApiKeyQuery) && has(self.hook) == has(oldSelf.hook)
+                    && has(self.unauthenticated) == has(oldSelf.unauthenticated)
+              label:
+                type: string
+              resourceRef:
+                type: string
+                x-kubernetes-validations:
+                - message: resourceRef is immutable
+                  rule: self == oldSelf
+              terminationProtection:
+                type: boolean
+            required:
+            - credentials
+            - label
+            - resourceRef
+            type: object
+          status:
+            properties:
+              conditions:
+                items:
+                  description: Condition contains details for one aspect of the current
+                    state of this API Resource.
+                  properties:
+                    lastTransitionTime:
+                      description: |-
+                        lastTransitionTime is the last time the condition transitioned from one status to another.
+                        This should be when the underlying condition changed.  If that is not known, then using the time when the API field changed is acceptable.
+                      format: date-time
+                      type: string
+                    message:
+                      description: |-
+                        message is a human readable message indicating details about the transition.
+                        This may be an empty string.
+                      maxLength: 32768
+                      type: string
+                    observedGeneration:
+                      description: |-
+                        observedGeneration represents the .metadata.generation that the condition was set based upon.
+                        For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
+                        with respect to the current state of the instance.
+                      format: int64
+                      minimum: 0
+                      type: integer
+                    reason:
+                      description: |-
+                        reason contains a programmatic identifier indicating the reason for the condition's last transition.
+                        Producers of specific condition types may define expected values and meanings for this field,
+                        and whether the values are considered a guaranteed API.
+                        The value should be a CamelCase string.
+                        This field may not be empty.
+                      maxLength: 1024
+                      minLength: 1
+                      pattern: ^[A-Za-z]([A-Za-z0-9_,:]*[A-Za-z0-9_])?$
+                      type: string
+                    status:
+                      description: status of the condition, one of True, False, Unknown.
+                      enum:
+                      - "True"
+                      - "False"
+                      - Unknown
+                      type: string
+                    type:
+                      description: type of condition in CamelCase or in foo.example.com/CamelCase.
+                      maxLength: 316
+                      pattern: ^([a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*/)?(([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9])$
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - message
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+              nativeUserId:
+                type: string
+            type: object
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}

@@ -43,6 +43,8 @@ spec:
                 type: array
               hostname:
                 type: string
+              nativeUsersV3Enabled:
+                type: boolean
               port:
                 format: int32
                 type: integer
