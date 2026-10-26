@@ -12,6 +12,11 @@ sidecar:
       cpu: 2
       memory: 4Gi
 
+# Run Formal VPN in the sidecar. Mounts the node's /dev/net/tun, so Pods fail
+# to start on nodes without it.
+vpn:
+  enabled: false
+
 # Set true when using the ecr-cred or azure-gar-cred chart.
 pullWithCredentials: false
 

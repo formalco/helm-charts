@@ -36,7 +36,14 @@ spec:
                 Object.spec.volumes{
                   name: "formal-ca",
                   emptyDir: Object.spec.volumes.emptyDir{}
-                }
+                }{{- if .Values.vpn.enabled }},
+                Object.spec.volumes{
+                  name: "formal-dev-net-tun",
+                  hostPath: Object.spec.volumes.hostPath{
+                    path: "/dev/net/tun",
+                    type: "CharDevice"
+                  }
+                }{{- end }}
               ],
               containers: object.spec.containers.map(c, Object.spec.containers{
                 name: c.name,
