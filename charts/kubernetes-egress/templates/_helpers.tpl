@@ -29,7 +29,7 @@ Object.spec.initContainers{
     allowPrivilegeEscalation: false,
     capabilities: Object.spec.initContainers.securityContext.capabilities{
       drop: ["ALL"],
-      add: ["NET_ADMIN"]
+      add: ["NET_ADMIN", "NET_BIND_SERVICE"]
     }
   },
   volumeMounts: [

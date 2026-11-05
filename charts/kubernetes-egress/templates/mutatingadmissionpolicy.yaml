@@ -18,7 +18,7 @@ spec:
         !object.spec.initContainers.exists(c, c.name == "formal-kubernetes-egress")
   variables:
     - name: caPath
-      expression: "'/formal-ca/localca-cert.pem'"
+      expression: "'/formal-ca/ca-bundle.pem'"
   mutations:
     - patchType: ApplyConfiguration
       applyConfiguration:
