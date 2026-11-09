@@ -1,0 +1,26 @@
+suite: API URL
+templates:
+  - deployment.yaml
+  - configmap.yaml
+set:
+  formalAPIKey: test-key
+tests:
+  - it: sets no API URL by default
+    template: deployment.yaml
+    asserts:
+      - notContains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: FORMAL_API_URL
+          any: true
+
+  - it: passes formalAPIURL to the operator
+    template: deployment.yaml
+    set:
+      formalAPIURL: https://api.formal.invalid
+    asserts:
+      - contains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: FORMAL_API_URL
+            value: https://api.formal.invalid

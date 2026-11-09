@@ -43,6 +43,10 @@ spec:
           env:
             - name: FORMAL_CONFIG
               value: /etc/formal/config.yaml
+            {{- with .Values.formalAPIURL }}
+            - name: FORMAL_API_URL
+              value: {{ . | quote }}
+            {{- end }}
             {{- if include "formal-common.hasAPIKey" . }}
             - name: FORMAL_API_KEY
               valueFrom:

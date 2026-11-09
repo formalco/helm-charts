@@ -1,6 +1,11 @@
 nameOverride: ""
 fullnameOverride: ""
 
+# Base URL of the Formal Control Plane API, e.g. https://api.formal.invalid for
+# a self-hosted control plane. Leave empty to use https://api.formal.ai. Set as
+# FORMAL_API_URL; the operator fails to start if it is not an absolute http(s) URL.
+formalAPIURL: ""
+
 # API key for the Formal Control Plane. The chart stores it in a Secret.
 # Mutually exclusive with formalAPIKeySecret and oidc.
 formalAPIKey: ""
