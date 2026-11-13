@@ -69,6 +69,52 @@ spec:
                         properties:
                           environmentVariable:
                             type: string
+                          secretManager:
+                            description: |-
+                              SecretManager is a secret the connector fetches from a cloud secret
+                              manager with its own cloud identity.
+                            properties:
+                              awsSecret:
+                                properties:
+                                  arn:
+                                    description: |-
+                                      ARN of the secret. The extended form
+                                      <arn>:<json-key>:<version-stage>:<version-id>, as in ECS task
+                                      definitions, selects a JSON key or a version.
+                                    minLength: 1
+                                    type: string
+                                required:
+                                - arn
+                                type: object
+                              azureSecret:
+                                properties:
+                                  url:
+                                    description: |-
+                                      URL is the secret identifier, as
+                                      https://<vault-name>.vault.azure.net/secrets/<name>[/<version>].
+                                    minLength: 1
+                                    type: string
+                                required:
+                                - url
+                                type: object
+                              gcpSecret:
+                                properties:
+                                  name:
+                                    description: |-
+                                      Name is the resource name of the secret version, as
+                                      projects/*/secrets/*/versions/* or
+                                      projects/*/locations/*/secrets/*/versions/*.
+                                    minLength: 1
+                                    type: string
+                                required:
+                                - name
+                                type: object
+                            type: object
+                            x-kubernetes-validations:
+                            - message: exactly one of awsSecret, gcpSecret or azureSecret
+                                must be configured
+                              rule: '(has(self.awsSecret) ? 1 : 0) + (has(self.gcpSecret)
+                                ? 1 : 0) + (has(self.azureSecret) ? 1 : 0) == 1'
                           secretRef:
                             properties:
                               key:
@@ -81,9 +127,10 @@ spec:
                             type: object
                         type: object
                         x-kubernetes-validations:
-                        - message: exactly one of secretRef or environmentVariable
-                            must be configured
-                          rule: has(self.secretRef) != has(self.environmentVariable)
+                        - message: exactly one of secretRef, environmentVariable or
+                            secretManager must be configured
+                          rule: '(has(self.secretRef) ? 1 : 0) + (has(self.environmentVariable)
+                            ? 1 : 0) + (has(self.secretManager) ? 1 : 0) == 1'
                       username:
                         type: string
                     required:
@@ -126,6 +173,59 @@ spec:
                         - http_api_key_header
                         - http_api_key_query
                         type: string
+                      secrets:
+                        additionalProperties:
+                          description: SecretManagerReference mirrors the Formal API's
+                            SecretManagerReference oneof.
+                          properties:
+                            awsSecret:
+                              properties:
+                                arn:
+                                  description: |-
+                                    ARN of the secret. The extended form
+                                    <arn>:<json-key>:<version-stage>:<version-id>, as in ECS task
+                                    definitions, selects a JSON key or a version.
+                                  minLength: 1
+                                  type: string
+                              required:
+                              - arn
+                              type: object
+                            azureSecret:
+                              properties:
+                                url:
+                                  description: |-
+                                    URL is the secret identifier, as
+                                    https://<vault-name>.vault.azure.net/secrets/<name>[/<version>].
+                                  minLength: 1
+                                  type: string
+                              required:
+                              - url
+                              type: object
+                            gcpSecret:
+                              properties:
+                                name:
+                                  description: |-
+                                    Name is the resource name of the secret version, as
+                                    projects/*/secrets/*/versions/* or
+                                    projects/*/locations/*/secrets/*/versions/*.
+                                  minLength: 1
+                                  type: string
+                              required:
+                              - name
+                              type: object
+                          type: object
+                          x-kubernetes-validations:
+                          - message: exactly one of awsSecret, gcpSecret or azureSecret
+                              must be configured
+                            rule: '(has(self.awsSecret) ? 1 : 0) + (has(self.gcpSecret)
+                              ? 1 : 0) + (has(self.azureSecret) ? 1 : 0) == 1'
+                        description: |-
+                          Secrets are resolved by the connector and passed to the hook as its
+                          fourth argument, keyed by name.
+                        type: object
+                        x-kubernetes-validations:
+                        - message: secret names must match ^[A-Za-z_][A-Za-z0-9_]*$
+                          rule: self.all(name, name.matches('^[A-Za-z_][A-Za-z0-9_]*$'))
                     required:
                     - code
                     - outputType
@@ -138,6 +238,52 @@ spec:
                         properties:
                           environmentVariable:
                             type: string
+                          secretManager:
+                            description: |-
+                              SecretManager is a secret the connector fetches from a cloud secret
+                              manager with its own cloud identity.
+                            properties:
+                              awsSecret:
+                                properties:
+                                  arn:
+                                    description: |-
+                                      ARN of the secret. The extended form
+                                      <arn>:<json-key>:<version-stage>:<version-id>, as in ECS task
+                                      definitions, selects a JSON key or a version.
+                                    minLength: 1
+                                    type: string
+                                required:
+                                - arn
+                                type: object
+                              azureSecret:
+                                properties:
+                                  url:
+                                    description: |-
+                                      URL is the secret identifier, as
+                                      https://<vault-name>.vault.azure.net/secrets/<name>[/<version>].
+                                    minLength: 1
+                                    type: string
+                                required:
+                                - url
+                                type: object
+                              gcpSecret:
+                                properties:
+                                  name:
+                                    description: |-
+                                      Name is the resource name of the secret version, as
+                                      projects/*/secrets/*/versions/* or
+                                      projects/*/locations/*/secrets/*/versions/*.
+                                    minLength: 1
+                                    type: string
+                                required:
+                                - name
+                                type: object
+                            type: object
+                            x-kubernetes-validations:
+                            - message: exactly one of awsSecret, gcpSecret or azureSecret
+                                must be configured
+                              rule: '(has(self.awsSecret) ? 1 : 0) + (has(self.gcpSecret)
+                                ? 1 : 0) + (has(self.azureSecret) ? 1 : 0) == 1'
                           secretRef:
                             properties:
                               key:
@@ -150,9 +296,10 @@ spec:
                             type: object
                         type: object
                         x-kubernetes-validations:
-                        - message: exactly one of secretRef or environmentVariable
-                            must be configured
-                          rule: has(self.secretRef) != has(self.environmentVariable)
+                        - message: exactly one of secretRef, environmentVariable or
+                            secretManager must be configured
+                          rule: '(has(self.secretRef) ? 1 : 0) + (has(self.environmentVariable)
+                            ? 1 : 0) + (has(self.secretManager) ? 1 : 0) == 1'
                     required:
                     - key
                     - value
@@ -165,6 +312,52 @@ spec:
                         properties:
                           environmentVariable:
                             type: string
+                          secretManager:
+                            description: |-
+                              SecretManager is a secret the connector fetches from a cloud secret
+                              manager with its own cloud identity.
+                            properties:
+                              awsSecret:
+                                properties:
+                                  arn:
+                                    description: |-
+                                      ARN of the secret. The extended form
+                                      <arn>:<json-key>:<version-stage>:<version-id>, as in ECS task
+                                      definitions, selects a JSON key or a version.
+                                    minLength: 1
+                                    type: string
+                                required:
+                                - arn
+                                type: object
+                              azureSecret:
+                                properties:
+                                  url:
+                                    description: |-
+                                      URL is the secret identifier, as
+                                      https://<vault-name>.vault.azure.net/secrets/<name>[/<version>].
+                                    minLength: 1
+                                    type: string
+                                required:
+                                - url
+                                type: object
+                              gcpSecret:
+                                properties:
+                                  name:
+                                    description: |-
+                                      Name is the resource name of the secret version, as
+                                      projects/*/secrets/*/versions/* or
+                                      projects/*/locations/*/secrets/*/versions/*.
+                                    minLength: 1
+                                    type: string
+                                required:
+                                - name
+                                type: object
+                            type: object
+                            x-kubernetes-validations:
+                            - message: exactly one of awsSecret, gcpSecret or azureSecret
+                                must be configured
+                              rule: '(has(self.awsSecret) ? 1 : 0) + (has(self.gcpSecret)
+                                ? 1 : 0) + (has(self.azureSecret) ? 1 : 0) == 1'
                           secretRef:
                             properties:
                               key:
@@ -177,9 +370,10 @@ spec:
                             type: object
                         type: object
                         x-kubernetes-validations:
-                        - message: exactly one of secretRef or environmentVariable
-                            must be configured
-                          rule: has(self.secretRef) != has(self.environmentVariable)
+                        - message: exactly one of secretRef, environmentVariable or
+                            secretManager must be configured
+                          rule: '(has(self.secretRef) ? 1 : 0) + (has(self.environmentVariable)
+                            ? 1 : 0) + (has(self.secretManager) ? 1 : 0) == 1'
                     required:
                     - key
                     - value
@@ -192,6 +386,52 @@ spec:
                         properties:
                           environmentVariable:
                             type: string
+                          secretManager:
+                            description: |-
+                              SecretManager is a secret the connector fetches from a cloud secret
+                              manager with its own cloud identity.
+                            properties:
+                              awsSecret:
+                                properties:
+                                  arn:
+                                    description: |-
+                                      ARN of the secret. The extended form
+                                      <arn>:<json-key>:<version-stage>:<version-id>, as in ECS task
+                                      definitions, selects a JSON key or a version.
+                                    minLength: 1
+                                    type: string
+                                required:
+                                - arn
+                                type: object
+                              azureSecret:
+                                properties:
+                                  url:
+                                    description: |-
+                                      URL is the secret identifier, as
+                                      https://<vault-name>.vault.azure.net/secrets/<name>[/<version>].
+                                    minLength: 1
+                                    type: string
+                                required:
+                                - url
+                                type: object
+                              gcpSecret:
+                                properties:
+                                  name:
+                                    description: |-
+                                      Name is the resource name of the secret version, as
+                                      projects/*/secrets/*/versions/* or
+                                      projects/*/locations/*/secrets/*/versions/*.
+                                    minLength: 1
+                                    type: string
+                                required:
+                                - name
+                                type: object
+                            type: object
+                            x-kubernetes-validations:
+                            - message: exactly one of awsSecret, gcpSecret or azureSecret
+                                must be configured
+                              rule: '(has(self.awsSecret) ? 1 : 0) + (has(self.gcpSecret)
+                                ? 1 : 0) + (has(self.azureSecret) ? 1 : 0) == 1'
                           secretRef:
                             properties:
                               key:
@@ -204,9 +444,10 @@ spec:
                             type: object
                         type: object
                         x-kubernetes-validations:
-                        - message: exactly one of secretRef or environmentVariable
-                            must be configured
-                          rule: has(self.secretRef) != has(self.environmentVariable)
+                        - message: exactly one of secretRef, environmentVariable or
+                            secretManager must be configured
+                          rule: '(has(self.secretRef) ? 1 : 0) + (has(self.environmentVariable)
+                            ? 1 : 0) + (has(self.secretManager) ? 1 : 0) == 1'
                       username:
                         type: string
                     required:
@@ -222,6 +463,52 @@ spec:
                         properties:
                           environmentVariable:
                             type: string
+                          secretManager:
+                            description: |-
+                              SecretManager is a secret the connector fetches from a cloud secret
+                              manager with its own cloud identity.
+                            properties:
+                              awsSecret:
+                                properties:
+                                  arn:
+                                    description: |-
+                                      ARN of the secret. The extended form
+                                      <arn>:<json-key>:<version-stage>:<version-id>, as in ECS task
+                                      definitions, selects a JSON key or a version.
+                                    minLength: 1
+                                    type: string
+                                required:
+                                - arn
+                                type: object
+                              azureSecret:
+                                properties:
+                                  url:
+                                    description: |-
+                                      URL is the secret identifier, as
+                                      https://<vault-name>.vault.azure.net/secrets/<name>[/<version>].
+                                    minLength: 1
+                                    type: string
+                                required:
+                                - url
+                                type: object
+                              gcpSecret:
+                                properties:
+                                  name:
+                                    description: |-
+                                      Name is the resource name of the secret version, as
+                                      projects/*/secrets/*/versions/* or
+                                      projects/*/locations/*/secrets/*/versions/*.
+                                    minLength: 1
+                                    type: string
+                                required:
+                                - name
+                                type: object
+                            type: object
+                            x-kubernetes-validations:
+                            - message: exactly one of awsSecret, gcpSecret or azureSecret
+                                must be configured
+                              rule: '(has(self.awsSecret) ? 1 : 0) + (has(self.gcpSecret)
+                                ? 1 : 0) + (has(self.azureSecret) ? 1 : 0) == 1'
                           secretRef:
                             properties:
                               key:
@@ -234,9 +521,10 @@ spec:
                             type: object
                         type: object
                         x-kubernetes-validations:
-                        - message: exactly one of secretRef or environmentVariable
-                            must be configured
-                          rule: has(self.secretRef) != has(self.environmentVariable)
+                        - message: exactly one of secretRef, environmentVariable or
+                            secretManager must be configured
+                          rule: '(has(self.secretRef) ? 1 : 0) + (has(self.environmentVariable)
+                            ? 1 : 0) + (has(self.secretManager) ? 1 : 0) == 1'
                     required:
                     - header
                     - token
@@ -247,6 +535,52 @@ spec:
                         properties:
                           environmentVariable:
                             type: string
+                          secretManager:
+                            description: |-
+                              SecretManager is a secret the connector fetches from a cloud secret
+                              manager with its own cloud identity.
+                            properties:
+                              awsSecret:
+                                properties:
+                                  arn:
+                                    description: |-
+                                      ARN of the secret. The extended form
+                                      <arn>:<json-key>:<version-stage>:<version-id>, as in ECS task
+                                      definitions, selects a JSON key or a version.
+                                    minLength: 1
+                                    type: string
+                                required:
+                                - arn
+                                type: object
+                              azureSecret:
+                                properties:
+                                  url:
+                                    description: |-
+                                      URL is the secret identifier, as
+                                      https://<vault-name>.vault.azure.net/secrets/<name>[/<version>].
+                                    minLength: 1
+                                    type: string
+                                required:
+                                - url
+                                type: object
+                              gcpSecret:
+                                properties:
+                                  name:
+                                    description: |-
+                                      Name is the resource name of the secret version, as
+                                      projects/*/secrets/*/versions/* or
+                                      projects/*/locations/*/secrets/*/versions/*.
+                                    minLength: 1
+                                    type: string
+                                required:
+                                - name
+                                type: object
+                            type: object
+                            x-kubernetes-validations:
+                            - message: exactly one of awsSecret, gcpSecret or azureSecret
+                                must be configured
+                              rule: '(has(self.awsSecret) ? 1 : 0) + (has(self.gcpSecret)
+                                ? 1 : 0) + (has(self.azureSecret) ? 1 : 0) == 1'
                           secretRef:
                             properties:
                               key:
@@ -259,9 +593,10 @@ spec:
                             type: object
                         type: object
                         x-kubernetes-validations:
-                        - message: exactly one of secretRef or environmentVariable
-                            must be configured
-                          rule: has(self.secretRef) != has(self.environmentVariable)
+                        - message: exactly one of secretRef, environmentVariable or
+                            secretManager must be configured
+                          rule: '(has(self.secretRef) ? 1 : 0) + (has(self.environmentVariable)
+                            ? 1 : 0) + (has(self.secretManager) ? 1 : 0) == 1'
                     required:
                     - kubeconfig
                     type: object
@@ -271,6 +606,52 @@ spec:
                         properties:
                           environmentVariable:
                             type: string
+                          secretManager:
+                            description: |-
+                              SecretManager is a secret the connector fetches from a cloud secret
+                              manager with its own cloud identity.
+                            properties:
+                              awsSecret:
+                                properties:
+                                  arn:
+                                    description: |-
+                                      ARN of the secret. The extended form
+                                      <arn>:<json-key>:<version-stage>:<version-id>, as in ECS task
+                                      definitions, selects a JSON key or a version.
+                                    minLength: 1
+                                    type: string
+                                required:
+                                - arn
+                                type: object
+                              azureSecret:
+                                properties:
+                                  url:
+                                    description: |-
+                                      URL is the secret identifier, as
+                                      https://<vault-name>.vault.azure.net/secrets/<name>[/<version>].
+                                    minLength: 1
+                                    type: string
+                                required:
+                                - url
+                                type: object
+                              gcpSecret:
+                                properties:
+                                  name:
+                                    description: |-
+                                      Name is the resource name of the secret version, as
+                                      projects/*/secrets/*/versions/* or
+                                      projects/*/locations/*/secrets/*/versions/*.
+                                    minLength: 1
+                                    type: string
+                                required:
+                                - name
+                                type: object
+                            type: object
+                            x-kubernetes-validations:
+                            - message: exactly one of awsSecret, gcpSecret or azureSecret
+                                must be configured
+                              rule: '(has(self.awsSecret) ? 1 : 0) + (has(self.gcpSecret)
+                                ? 1 : 0) + (has(self.azureSecret) ? 1 : 0) == 1'
                           secretRef:
                             properties:
                               key:
@@ -283,9 +664,10 @@ spec:
                             type: object
                         type: object
                         x-kubernetes-validations:
-                        - message: exactly one of secretRef or environmentVariable
-                            must be configured
-                          rule: has(self.secretRef) != has(self.environmentVariable)
+                        - message: exactly one of secretRef, environmentVariable or
+                            secretManager must be configured
+                          rule: '(has(self.secretRef) ? 1 : 0) + (has(self.environmentVariable)
+                            ? 1 : 0) + (has(self.secretManager) ? 1 : 0) == 1'
                     required:
                     - kubeconfigPath
                     type: object
@@ -295,6 +677,52 @@ spec:
                         properties:
                           environmentVariable:
                             type: string
+                          secretManager:
+                            description: |-
+                              SecretManager is a secret the connector fetches from a cloud secret
+                              manager with its own cloud identity.
+                            properties:
+                              awsSecret:
+                                properties:
+                                  arn:
+                                    description: |-
+                                      ARN of the secret. The extended form
+                                      <arn>:<json-key>:<version-stage>:<version-id>, as in ECS task
+                                      definitions, selects a JSON key or a version.
+                                    minLength: 1
+                                    type: string
+                                required:
+                                - arn
+                                type: object
+                              azureSecret:
+                                properties:
+                                  url:
+                                    description: |-
+                                      URL is the secret identifier, as
+                                      https://<vault-name>.vault.azure.net/secrets/<name>[/<version>].
+                                    minLength: 1
+                                    type: string
+                                required:
+                                - url
+                                type: object
+                              gcpSecret:
+                                properties:
+                                  name:
+                                    description: |-
+                                      Name is the resource name of the secret version, as
+                                      projects/*/secrets/*/versions/* or
+                                      projects/*/locations/*/secrets/*/versions/*.
+                                    minLength: 1
+                                    type: string
+                                required:
+                                - name
+                                type: object
+                            type: object
+                            x-kubernetes-validations:
+                            - message: exactly one of awsSecret, gcpSecret or azureSecret
+                                must be configured
+                              rule: '(has(self.awsSecret) ? 1 : 0) + (has(self.gcpSecret)
+                                ? 1 : 0) + (has(self.azureSecret) ? 1 : 0) == 1'
                           secretRef:
                             properties:
                               key:
@@ -307,9 +735,10 @@ spec:
                             type: object
                         type: object
                         x-kubernetes-validations:
-                        - message: exactly one of secretRef or environmentVariable
-                            must be configured
-                          rule: has(self.secretRef) != has(self.environmentVariable)
+                        - message: exactly one of secretRef, environmentVariable or
+                            secretManager must be configured
+                          rule: '(has(self.secretRef) ? 1 : 0) + (has(self.environmentVariable)
+                            ? 1 : 0) + (has(self.secretManager) ? 1 : 0) == 1'
                       username:
                         type: string
                     required:
@@ -322,6 +751,52 @@ spec:
                         properties:
                           environmentVariable:
                             type: string
+                          secretManager:
+                            description: |-
+                              SecretManager is a secret the connector fetches from a cloud secret
+                              manager with its own cloud identity.
+                            properties:
+                              awsSecret:
+                                properties:
+                                  arn:
+                                    description: |-
+                                      ARN of the secret. The extended form
+                                      <arn>:<json-key>:<version-stage>:<version-id>, as in ECS task
+                                      definitions, selects a JSON key or a version.
+                                    minLength: 1
+                                    type: string
+                                required:
+                                - arn
+                                type: object
+                              azureSecret:
+                                properties:
+                                  url:
+                                    description: |-
+                                      URL is the secret identifier, as
+                                      https://<vault-name>.vault.azure.net/secrets/<name>[/<version>].
+                                    minLength: 1
+                                    type: string
+                                required:
+                                - url
+                                type: object
+                              gcpSecret:
+                                properties:
+                                  name:
+                                    description: |-
+                                      Name is the resource name of the secret version, as
+                                      projects/*/secrets/*/versions/* or
+                                      projects/*/locations/*/secrets/*/versions/*.
+                                    minLength: 1
+                                    type: string
+                                required:
+                                - name
+                                type: object
+                            type: object
+                            x-kubernetes-validations:
+                            - message: exactly one of awsSecret, gcpSecret or azureSecret
+                                must be configured
+                              rule: '(has(self.awsSecret) ? 1 : 0) + (has(self.gcpSecret)
+                                ? 1 : 0) + (has(self.azureSecret) ? 1 : 0) == 1'
                           secretRef:
                             properties:
                               key:
@@ -334,13 +809,60 @@ spec:
                             type: object
                         type: object
                         x-kubernetes-validations:
-                        - message: exactly one of secretRef or environmentVariable
-                            must be configured
-                          rule: has(self.secretRef) != has(self.environmentVariable)
+                        - message: exactly one of secretRef, environmentVariable or
+                            secretManager must be configured
+                          rule: '(has(self.secretRef) ? 1 : 0) + (has(self.environmentVariable)
+                            ? 1 : 0) + (has(self.secretManager) ? 1 : 0) == 1'
                       key:
                         properties:
                           environmentVariable:
                             type: string
+                          secretManager:
+                            description: |-
+                              SecretManager is a secret the connector fetches from a cloud secret
+                              manager with its own cloud identity.
+                            properties:
+                              awsSecret:
+                                properties:
+                                  arn:
+                                    description: |-
+                                      ARN of the secret. The extended form
+                                      <arn>:<json-key>:<version-stage>:<version-id>, as in ECS task
+                                      definitions, selects a JSON key or a version.
+                                    minLength: 1
+                                    type: string
+                                required:
+                                - arn
+                                type: object
+                              azureSecret:
+                                properties:
+                                  url:
+                                    description: |-
+                                      URL is the secret identifier, as
+                                      https://<vault-name>.vault.azure.net/secrets/<name>[/<version>].
+                                    minLength: 1
+                                    type: string
+                                required:
+                                - url
+                                type: object
+                              gcpSecret:
+                                properties:
+                                  name:
+                                    description: |-
+                                      Name is the resource name of the secret version, as
+                                      projects/*/secrets/*/versions/* or
+                                      projects/*/locations/*/secrets/*/versions/*.
+                                    minLength: 1
+                                    type: string
+                                required:
+                                - name
+                                type: object
+                            type: object
+                            x-kubernetes-validations:
+                            - message: exactly one of awsSecret, gcpSecret or azureSecret
+                                must be configured
+                              rule: '(has(self.awsSecret) ? 1 : 0) + (has(self.gcpSecret)
+                                ? 1 : 0) + (has(self.azureSecret) ? 1 : 0) == 1'
                           secretRef:
                             properties:
                               key:
@@ -353,9 +875,10 @@ spec:
                             type: object
                         type: object
                         x-kubernetes-validations:
-                        - message: exactly one of secretRef or environmentVariable
-                            must be configured
-                          rule: has(self.secretRef) != has(self.environmentVariable)
+                        - message: exactly one of secretRef, environmentVariable or
+                            secretManager must be configured
+                          rule: '(has(self.secretRef) ? 1 : 0) + (has(self.environmentVariable)
+                            ? 1 : 0) + (has(self.secretManager) ? 1 : 0) == 1'
                       username:
                         type: string
                     required:
