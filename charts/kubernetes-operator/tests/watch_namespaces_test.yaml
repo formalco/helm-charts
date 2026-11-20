@@ -1,0 +1,84 @@
+suite: Watch namespaces
+templates:
+  - rbac.yaml
+  - configmap.yaml
+set:
+  formalAPIKey: test-key
+tests:
+  - it: grants cluster-wide access by default
+    template: rbac.yaml
+    asserts:
+      - hasDocuments:
+          count: 2
+      - isKind:
+          of: ClusterRole
+        documentIndex: 0
+      - contains:
+          path: rules
+          content:
+            apiGroups: [""]
+            resources: ["secrets"]
+            verbs: ["get", "list", "watch"]
+        documentIndex: 0
+      - isKind:
+          of: ClusterRoleBinding
+        documentIndex: 1
+
+  - it: writes no watchNamespaces by default
+    template: configmap.yaml
+    asserts:
+      - notMatchRegex:
+          path: data["config.yaml"]
+          pattern: watchNamespaces
+
+  - it: replaces the ClusterRole with a Role and RoleBinding per namespace
+    template: rbac.yaml
+    set:
+      watchNamespaces: [payments, orders]
+    asserts:
+      - hasDocuments:
+          count: 4
+      - isKind:
+          of: Role
+        documentIndex: 0
+      - equal:
+          path: metadata.namespace
+          value: payments
+        documentIndex: 0
+      - contains:
+          path: rules
+          content:
+            apiGroups: [""]
+            resources: ["secrets"]
+            verbs: ["get", "list", "watch"]
+        documentIndex: 0
+      - isKind:
+          of: RoleBinding
+        documentIndex: 1
+      - equal:
+          path: subjects[0].namespace
+          value: NAMESPACE
+        documentIndex: 1
+      - equal:
+          path: metadata.namespace
+          value: orders
+        documentIndex: 2
+
+  - it: keeps namespaces that YAML would parse as booleans as strings
+    template: rbac.yaml
+    set:
+      watchNamespaces: ["on"]
+    asserts:
+      - equal:
+          path: metadata.namespace
+          value: "on"
+        documentIndex: 0
+
+  - it: writes watchNamespaces to the operator config
+    template: configmap.yaml
+    set:
+      watchNamespaces: [payments, orders]
+    asserts:
+      - matchRegex:
+          path: data["config.yaml"]
+          pattern: '(?m)^watchNamespaces:\n  - "payments"\n  - "orders"$'

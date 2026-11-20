@@ -25,6 +25,12 @@ formalAPIKeySecret:
 oidc:
   integration_id: ""
 
+# Namespaces the operator watches. Empty watches every namespace through a
+# ClusterRole. When set, the chart creates a Role and RoleBinding in each
+# namespace instead of the ClusterRole, and the operator ignores Formal custom
+# resources and Secrets everywhere else.
+watchNamespaces: []
+
 serviceAccount:
   annotations: {}
 
