@@ -1,4 +1,4 @@
-# Native sidecar image. Build from desktop/Dockerfile.linux-endpoint.
+# Native sidecar image, built from //bazel/images:kubernetes_egress.
 sidecar:
   image:
     repository: 654654333078.dkr.ecr.us-east-1.amazonaws.com/formalco-prod-kubernetes-egress

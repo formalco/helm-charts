@@ -79,6 +79,10 @@ service:
     # # The Connector reads the original one from the PROXY protocol header.
     # service.beta.kubernetes.io/aws-load-balancer-proxy-protocol: "*"
 
+  # Optional: request a specific load balancer IP, for providers that
+  # support it (e.g. a reserved static IP on GKE)
+  loadBalancerIP: ""
+
   # Optional: restrict source IPs that can access the service
   loadBalancerSourceRanges: []
     # - 10.0.0.0/8
