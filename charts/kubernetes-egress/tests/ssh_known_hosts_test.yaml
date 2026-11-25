@@ -1,0 +1,15 @@
+suite: SSH known_hosts
+templates:
+  - mutatingadmissionpolicy.yaml
+tests:
+  - it: mounts the Endpoint's ssh_known_hosts where OpenSSH reads it
+    asserts:
+      - matchRegex:
+          path: spec.mutations[0].applyConfiguration.expression
+          pattern: 'name: "formal-ca",\s+mountPath: "/etc/ssh/ssh_known_hosts2",\s+subPath: "ssh_known_hosts",\s+readOnly: true'
+
+  - it: starts application containers only once ssh_known_hosts exists
+    asserts:
+      - matchRegex:
+          path: spec.mutations[1].jsonPatch.expression
+          pattern: 'command: \["test", "-s", "/var/lib/formal/ca/ssh_known_hosts"\]'

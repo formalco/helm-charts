@@ -86,6 +86,14 @@ spec:
                     name: "formal-ca",
                     mountPath: "/formal-ca",
                     readOnly: true
+                  },
+                  {{- /* OpenSSH reads this file by default. Images rarely ship
+                  one, so mounting it rarely hides anything. */}}
+                  Object.spec.containers.volumeMounts{
+                    name: "formal-ca",
+                    mountPath: "/etc/ssh/ssh_known_hosts2",
+                    subPath: "ssh_known_hosts",
+                    readOnly: true
                   }
                 ]
               })

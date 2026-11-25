@@ -32,6 +32,15 @@ Object.spec.initContainers{
       add: ["NET_ADMIN", "NET_BIND_SERVICE"]
     }
   },
+  {{- /* Application containers mount ssh_known_hosts by subPath, so it must
+  exist before they start. */}}
+  startupProbe: Object.spec.initContainers.startupProbe{
+    exec: Object.spec.initContainers.startupProbe.exec{
+      command: ["test", "-s", "/var/lib/formal/ca/ssh_known_hosts"]
+    },
+    periodSeconds: 1,
+    failureThreshold: 300
+  },
   volumeMounts: [
     Object.spec.initContainers.volumeMounts{
       name: "formal-ca",
