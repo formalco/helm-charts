@@ -434,6 +434,16 @@ entries:
     version: 0.1.0
   kubernetes-egress:
   - apiVersion: v2
+    created: "2026-11-25T16:21:27.710919975Z"
+    description: Inject Formal Endpoint as a sidecar. Requires Kubernetes 1.36+.
+    digest: de75df1fe015cb4c0ea00e923335d6b538d57c58a78a09615cf9b9127a8c9a2a
+    kubeVersion: '>=1.36.0-0'
+    name: kubernetes-egress
+    type: application
+    urls:
+    - https://github.com/formalco/helm-charts/releases/download/kubernetes-egress-0.4.0/kubernetes-egress-0.4.0.tgz
+    version: 0.4.0
+  - apiVersion: v2
     created: "2026-11-05T17:42:27.253249925Z"
     description: Inject Formal Endpoint as a sidecar. Requires Kubernetes 1.36+.
     digest: 0d3372e51145d7745a3d1e40b1262688c445441b23ffc5717333335528082fad
@@ -781,4 +791,4 @@ entries:
     urls:
     - https://github.com/formalco/helm-charts/releases/download/policy-data-loader-satellite-0.1.0/policy-data-loader-satellite-0.1.0.tgz
     version: 0.1.0
-generated: "2026-11-24T20:14:46.063324222Z"
+generated: "2026-11-25T16:21:27.711012587Z"
